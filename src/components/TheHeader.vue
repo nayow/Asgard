@@ -1,9 +1,15 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> ——
-    <router-link to="/histoire">Histoire</router-link> —
-    <router-link to="/produits">Produits</router-link> —
-    <router-link to="/contact">Contact</router-link>
+  <div class="container-fluid" id="nav">
+    <div class="row g-0">
+      <div class="col">
+        Asgard is a new world
+      </div>
+      <div class="col" id="nav-links">
+        <router-link to="#">Histoire</router-link> —
+        <router-link to="#">Produits</router-link> —
+        <router-link to="#">Contact</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,16 +19,19 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #nav {
   padding: 0.6rem;
   background-color: whitesmoke;
-  text-align: right;
+  font-weight: bold;
   color: black;
 }
 
+#nav-links {
+  text-align: right;
+}
+
 #nav a {
-  font-weight: bold;
   text-decoration: none;
   color: inherit;
 }

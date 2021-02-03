@@ -1,29 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import Histoire from "../views/Histoire.vue";
-import Produits from "../views/Produits.vue";
-import Contact from "../views/Contact.vue";
+import BaseContent from "@/views/BaseContent.vue";
+import AgeCheck from "@/views/AgeCheck.vue";
+import PageNotFound from "@/views/PageNotFound.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    component: BaseContent
   },
   {
-    path: "/histoire",
-    name: "Histoire",
-    component: Histoire
+    path: "/age",
+    component: AgeCheck
   },
   {
-    path: "/produits",
-    name: "Produits",
-    component: Produits
-  },
-  {
-    path: "/contact",
-    name: "Contact",
-    component: Contact
+    path: "/:pathMatch(.*)*",
+    component: PageNotFound
   }
 ];
 
@@ -31,5 +22,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 });
+
+///
+// router.beforeEach(function(to, from, next)
+//   next() if cookie present
+// });
 
 export default router;
