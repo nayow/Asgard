@@ -1,7 +1,7 @@
 <template>
   <div class="row align-items-center slide__wrapper">
-    <svg class="slide__svg" height="1em" viewBox="">
-      <text x="0" y="0.75em" fill="#009EFF">
+    <svg class="slide__svg" height="1em">
+      <text class="slide__text" x="100vw" y="0.75em" fill="#F5F5F5">
         ASGARD
       </text>
     </svg>
@@ -9,8 +9,29 @@
 </template>
 
 <script>
+import gsap from "gsap";
 export default {
-  name: "History"
+  name: "History",
+  mounted() {
+    let textWidth, viewportWidth;
+    const slideSVG = document.querySelector(".slide__svg");
+
+    slideSVG.addEventListener("load", function() {
+      textWidth = document.querySelector(".slide__text").scrollWidth;
+      viewportWidth = document.body.clientWidth;
+      console.log(textWidth, viewportWidth);
+      animateSlide();
+    });
+
+    const animateSlide = function() {
+      gsap.to(".slide__text", {
+        duration: 5,
+        ease: "none",
+        x: "-=" + textWidth, //move text to the left
+        repeat: -1
+      });
+    };
+  }
 };
 </script>
 
@@ -21,6 +42,11 @@ export default {
 }
 .slide__svg {
   font-size: 110vh;
+}
+.slide__text {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 /* .slide__content {
   height: 100%;

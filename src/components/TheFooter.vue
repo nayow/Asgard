@@ -9,10 +9,9 @@ import gsap from "gsap";
 export default {
   name: "TheFooter",
   mounted() {
-    const viewportWidth = window.screen.width;
+    const viewportMaxWidth = window.screen.width;
     const elementWidth = 318; //px
-    const elementsNb = Math.floor(viewportWidth / elementWidth) + 2;
-    console.log(viewportWidth, elementWidth, elementsNb); // always covers over 100vw with 1 entire element out
+    const elementsNb = Math.floor(viewportMaxWidth / elementWidth) + 2; // always covers over 100vw with 1 entire element out
 
     this.$nextTick(function() {
       const wrapper = document.querySelector(".wrapper");
@@ -24,7 +23,6 @@ export default {
         box.classList.add("sliding-box", "d-inline", "text-nowrap");
         box.innerHTML = "THE NEW POWER OF ENERGY DRINK —";
         wrapper.appendChild(box);
-        console.log(i, viewportWidth, elementWidth, elementsNb);
       });
       // eslint-disable-next-line no-unused-vars
     }).then(_ => {
@@ -68,5 +66,8 @@ export default {
   position: absolute;
   width: 318px;
   text-align: center;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 </style>
