@@ -1,12 +1,12 @@
 <template>
   <div id="fullpage">
-    <div class="section" data-anchor="history">
+    <div class="section">
       <History />
     </div>
-    <div class="section" data-anchor="product">
+    <div class="section">
       <Product />
     </div>
-    <div class="section" data-anchor="contact">
+    <div class="section">
       <Contact />
     </div>
   </div>
@@ -28,7 +28,8 @@ export default {
   mounted() {
     new fullpage("#fullpage", {
       licenseKey: "abc",
-      anchors: ["history", "product", "contact"]
+      anchors: ["histoire", "produits", "contact"],
+      responsiveWidth: 600
     });
   }
 };

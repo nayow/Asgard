@@ -1,0 +1,5 @@
+@font-face {
+  font-family: "Futhark";
+  src: local("Futhark"),
+  url(./futhark-regular.otf) format("opentype");
+}

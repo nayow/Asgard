@@ -1,10 +1,9 @@
 <template>
-  product
-  <img src="@/assets/test.jpg" />
+  <div class="bg"></div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style></style>
+<style scoped></style>

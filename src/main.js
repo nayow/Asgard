@@ -1,11 +1,9 @@
 import "./assets/main.scss";
-import { gsap } from "gsap";
-import VueCookies from "vue-cookies";
-
+import "./fonts/futhark.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
 createApp(App)
-  .use(router, gsap, VueCookies)
+  .use(router)
   .mount("#app");

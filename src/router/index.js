@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import BaseContent from "@/views/BaseContent.vue";
 import AgeCheck from "@/views/AgeCheck.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
+// import VueCookies from "vue-cookies";
 
 const routes = [
   {

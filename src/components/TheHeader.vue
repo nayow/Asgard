@@ -2,12 +2,11 @@
   <div class="container-fluid" id="nav">
     <div class="row g-0">
       <div class="col">
-        Asgard is a new world
+        ASGARD IS A NEW WORLD
       </div>
       <div class="col" id="nav-links">
-        <router-link to="#">Histoire</router-link> —
-        <router-link to="#">Produits</router-link> —
-        <router-link to="#">Contact</router-link>
+        <a href="#histoire">HISTOIRE</a> — <a href="#produits">PRODUITS</a> —
+        <a href="#contact">CONTACT</a>
       </div>
     </div>
   </div>
@@ -19,12 +18,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #nav {
-  padding: 0.6rem;
+  position: fixed;
+  top: 0px;
+  height: 40px;
   background-color: whitesmoke;
-  font-weight: bold;
   color: black;
+  z-index: 9;
 }
 
 #nav-links {
@@ -36,7 +37,7 @@ export default {
   color: inherit;
 }
 
-#nav a.router-link-exact-active {
+#nav a.div-exact-active {
   color: inherit;
 }
 </style>

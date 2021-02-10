@@ -1,8 +1,7 @@
 <template>
-  <div id="wrap">
-    <TheHeader />
+  <TheHeader />
+  <div class="container-fluid">
     <router-view />
-    <div id="push"></div>
   </div>
   <TheFooter />
 </template>
@@ -21,33 +20,17 @@ export default {
 </script>
 
 <style>
-html,
-body,
-#app {
-  height: 100%;
-}
-
 body {
   margin: 0px;
   background-color: black;
+  font-size: 24px; /* new default rem */
+  letter-spacing: 0.1rem;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Futhark, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #009eff;
-}
-
-#wrap {
-  min-height: 100%;
-  margin: 0 auto -2.7rem; /* 2.7rem = footer height = nav height */
-  height: auto !important;
-  height: 100%;
-}
-
-/* Viewport height limit when page turns scrollable */
-#push {
-  height: 250px;
 }
 </style>

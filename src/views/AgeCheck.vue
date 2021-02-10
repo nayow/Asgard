@@ -3,7 +3,12 @@
 </template>
 
 <script>
-export default {};
+import VueCookies from "vue-cookies";
+export default {
+  mounted() {
+    VueCookies.set("theme", "default");
+  }
+};
 </script>
 
 <style></style>
