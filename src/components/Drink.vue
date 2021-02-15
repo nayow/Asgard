@@ -1,13 +1,13 @@
 <template>
   <app-background>
-    CONTACT
+    HILDR
   </app-background>
 </template>
 
 <script>
 import AppBackground from "./AppBackground.vue";
 export default {
-  name: "Contact",
+  name: "Drink",
   components: {
     AppBackground
   }

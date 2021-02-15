@@ -31,6 +31,6 @@ body {
   font-family: Futhark, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #009eff;
+  color: #f5f5f5;
 }
 </style>

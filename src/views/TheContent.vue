@@ -4,7 +4,7 @@
       <History />
     </div>
     <div class="section">
-      <Product />
+      <Drink />
     </div>
     <div class="section">
       <Contact />
@@ -15,20 +15,20 @@
 <script>
 import fullpage from "fullpage.js";
 import History from "@/components/History.vue";
-import Product from "@/components/Product.vue";
+import Drink from "@/components/Drink.vue";
 import Contact from "@/components/Contact.vue";
 
 export default {
-  name: "BaseContent",
+  name: "TheContent",
   components: {
     History,
-    Product,
+    Drink,
     Contact
   },
   mounted() {
     new fullpage("#fullpage", {
       licenseKey: "abc",
-      anchors: ["histoire", "produits", "contact"],
+      anchors: ["histoire", "boisson", "contact"],
       responsiveWidth: 600
     });
   }

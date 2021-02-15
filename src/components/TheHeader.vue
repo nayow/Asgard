@@ -5,7 +5,7 @@
         ASGARD IS A NEW WORLD
       </div>
       <div class="col" id="nav-links">
-        <a href="#histoire">HISTOIRE</a> — <a href="#produits">PRODUITS</a> —
+        <a href="#histoire">HISTOIRE</a> — <a href="#boisson">BOISSON</a> —
         <a href="#contact">CONTACT</a>
       </div>
     </div>

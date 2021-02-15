@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import BaseContent from "@/views/BaseContent.vue";
+import TheContent from "@/views/TheContent.vue";
 import AgeCheck from "@/views/AgeCheck.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
 // import VueCookies from "vue-cookies";
@@ -7,7 +7,7 @@ import PageNotFound from "@/views/PageNotFound.vue";
 const routes = [
   {
     path: "/",
-    component: BaseContent
+    component: TheContent
   },
   {
     path: "/age",
