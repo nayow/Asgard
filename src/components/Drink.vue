@@ -1,15 +1,15 @@
 <template>
-  <app-background>
+  <drink-background>
     HILDR
-  </app-background>
+  </drink-background>
 </template>
 
 <script>
-import AppBackground from "./AppBackground.vue";
+import DrinkBackground from "./DrinkBackground.vue";
 export default {
   name: "Drink",
   components: {
-    AppBackground
+    DrinkBackground
   }
 };
 </script>

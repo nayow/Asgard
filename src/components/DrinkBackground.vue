@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "AppBackground"
+  name: "DrinkBackground"
 };
 </script>
 
