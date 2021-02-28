@@ -1,4 +1,4 @@
-import "./assets/main.scss";
+import "./styles/main.scss";
 import "./fonts/futhark.css";
 import { createApp } from "vue";
 import App from "./App.vue";

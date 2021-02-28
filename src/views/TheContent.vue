@@ -1,6 +1,9 @@
 <template>
   <div id="fullpage">
     <div class="section">
+      <Intro />
+    </div>
+    <div class="section">
       <History />
     </div>
     <div class="section">
@@ -14,6 +17,7 @@
 
 <script>
 import fullpage from "fullpage.js";
+import Intro from "@/components/Intro.vue";
 import History from "@/components/History.vue";
 import Drink from "@/components/Drink.vue";
 import Contact from "@/components/Contact.vue";
@@ -21,6 +25,7 @@ import Contact from "@/components/Contact.vue";
 export default {
   name: "TheContent",
   components: {
+    Intro,
     History,
     Drink,
     Contact

@@ -34,22 +34,18 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  height: calc(100vh - 80px);
-}
-
-.wrapper .row:nth-child(1) {
+.row:nth-child(1) {
   margin-bottom: -0.2em;
 }
 
-.wrapper .row:nth-child(2),
-.wrapper .row:nth-child(3) {
+.row:nth-child(2),
+.row:nth-child(3) {
   padding: 0.3em;
 }
 
 /* wide screens */
-@media (min-aspect-ratio: 1.2/1) {
-  .wrapper .row:nth-child(1) {
+@media (min-aspect-ratio: 12/10) {
+  .row:nth-child(1) {
     font-size: 50vh;
   }
   .wrapper {
@@ -59,8 +55,8 @@ export default {
 }
 
 /* square-ish screens */
-@media (min-aspect-ratio: 1/1) and (max-aspect-ratio: 1.2/1) {
-  .wrapper .row:nth-child(1) {
+@media (min-aspect-ratio: 1/1) and (max-aspect-ratio: 12/10) {
+  .row:nth-child(1) {
     font-size: 35vw;
   }
   .wrapper {
@@ -71,7 +67,7 @@ export default {
 
 /* tall screens */
 @media (max-aspect-ratio: 1/1) {
-  .wrapper .row:nth-child(1) {
+  .row:nth-child(1) {
     font-size: 35vw;
   }
   .wrapper {
