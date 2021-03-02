@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <base-title color="blue">L'HISTOIRE</base-title>
+    <HistoryBackground />
     <div class="row justify-content-center">
       <div class="col-xs-12 col-md-6 text-center">
         <p>
@@ -21,10 +22,12 @@
 
 <script>
 import BaseTitle from "./BaseTitle.vue";
+import HistoryBackground from "./HistoryBackground.vue";
 export default {
   name: "History",
   components: {
-    BaseTitle
+    BaseTitle,
+    HistoryBackground
   }
 };
 </script>

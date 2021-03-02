@@ -48,5 +48,20 @@
   }
 }
 
+.glow--yellow {
+  color: #ffee00;
+  -webkit-animation: glow--yellow 1s ease-in-out infinite alternate;
+  -moz-animation: glow--yellow 1s ease-in-out infinite alternate;
+  animation: glow--yellow 1s ease-in-out infinite alternate;
+}
+@keyframes glow--yellow {
+  from {
+    text-shadow: 0 0 10px #ffea71, 0 0 20px #cab332, 0 0 30px #cab332,
+      0 0 40px #cab332;
+  }
+  to {
+    text-shadow: 0 0 10px #cea800, 0 0 20px #cea800, 0 0 30px #cea800;
+  }
+}
 
 

@@ -1,22 +1,23 @@
 <template>
+  <!-- NEED TO USE FLEXBOX INSTEAD -->
   <div class="wrapper">
     <div class="row justify-content-center">
       <div class="text-center">CONTACT</div>
     </div>
     <div class="row align-items-center justify-content-center">
       <div id="subtext" class="text-center">
-        COLLABORATIONS, DISTRIBUTION, QUESTIONS
-        <br />
-        NOUS VOUS REPONDRONS
+        COLLABORATIONS, DISTRIBUTION, QUESTIONS, NOUS VOUS REPONDRONS
       </div>
     </div>
     <div class="row align-items-center justify-content-center">
-      <div class="col-sm-5 col-md-3 text-center">
-        <span>TEL</span>
-        <span>06 77 88 99 66</span>
-      </div>
-      <div class="col-sm-5 col-md-3 text-center">MAIL</div>
-      <div class="col-5 col-md-3 text-center">RESEAUX SOCIAUX</div>
+      <div class="col-sm-5 col-md-3 text-center glow--blue">TEL</div>
+      <div class="col-sm-5 col-md-3 text-center glow--yellow">MAIL</div>
+      <div class="col-5 col-md-3 text-center glow--red">RESEAUX SOCIAUX</div>
+    </div>
+    <div class="row align-items-center justify-content-center">
+      <div class="col-sm-5 col-md-3 text-center">06 77 88 99 66</div>
+      <div class="col-sm-5 col-md-3 text-center">HELLO@ASGARD.COOL</div>
+      <div class="col-5 col-md-3 text-center">@ASGARD_DRINK</div>
     </div>
   </div>
 </template>
@@ -34,13 +35,18 @@ export default {
 </script>
 
 <style scoped>
+/* reduce distance with the bottom of 'contact' */
 .row:nth-child(1) {
   margin-bottom: -0.2em;
 }
 
-.row:nth-child(2),
-.row:nth-child(3) {
+.row:nth-child(2) {
   padding: 0.3em;
+  margin-bottom: 2em;
+}
+
+.row:nth-child(4) {
+  font-size: 1.2em;
 }
 
 /* wide screens */
