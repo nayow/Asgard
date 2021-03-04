@@ -2,11 +2,12 @@
   <div class="container-fluid" id="nav">
     <div class="row g-0">
       <div class="col">
-        ASGARD IS A NEW WORLD
+        <a href="#home">ASGARD IS A NEW WORLD</a>
       </div>
       <div class="col" id="nav-links">
-        <a href="#histoire">HISTOIRE</a> — <a href="#boisson">BOISSON</a> —
-        <a href="#contact">CONTACT</a>
+        <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
+        <a href="#boisson" data-menuanchor="boisson">BOISSON</a> —
+        <a href="#contact" data-menuanchor="contact">CONTACT</a>
       </div>
     </div>
   </div>
@@ -35,6 +36,12 @@ export default {
 #nav a {
   text-decoration: none;
   color: inherit;
+}
+
+/* dynamically added by fullpage.js */
+#nav a.active {
+  background-color: #000;
+  color: whitesmoke;
 }
 
 #nav a.div-exact-active {

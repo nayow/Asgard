@@ -1,5 +1,5 @@
 <template>
-  <!-- NEED TO USE FLEXBOX INSTEAD -->
+  <!-- TODO: use flexbox instead -->
   <div class="wrapper">
     <div class="row justify-content-center">
       <div class="text-center">CONTACT</div>
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-/* reduce distance with the bottom of 'contact' */
+/* reduce space below 'contact' */
 .row:nth-child(1) {
   margin-bottom: -0.2em;
 }

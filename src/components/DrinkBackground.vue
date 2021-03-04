@@ -1,6 +1,7 @@
 <template>
-  <div id="wrapper" class="row align-items-center justify-content-center">
-    <span id="bg-text" class="text-center">
+  <!-- eslint-disable-next-line prettier/prettier -->
+  <div id="text__wrapper" class="d-flex justify-content-center align-items-center">
+    <span id="text">
       <slot></slot>
     </span>
   </div>
@@ -13,22 +14,22 @@ export default {
 </script>
 
 <style scoped>
-#wrapper {
-  height: calc(100vh - 80px);
+#text__wrapper {
+  height: 100%;
 }
 
-#bg-text {
+#text {
   padding-bottom: 0.25em; /* to center text in viewport, relatively to current font-size */
 }
 
 @media (min-aspect-ratio: 12/10) {
-  #bg-text {
+  #text {
     font-size: 50vh;
   }
 }
 
 @media (max-aspect-ratio: 12/10) {
-  #bg-text {
+  #text {
     font-size: 35vw;
   }
 }

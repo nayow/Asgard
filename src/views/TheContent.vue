@@ -33,8 +33,9 @@ export default {
   mounted() {
     new fullpage("#fullpage", {
       licenseKey: "abc",
-      anchors: ["histoire", "boisson", "contact"],
-      responsiveWidth: 600
+      anchors: ["home", "histoire", "boisson", "contact"],
+      responsiveWidth: 600,
+      menu: "#nav-links"
     });
   }
 };
