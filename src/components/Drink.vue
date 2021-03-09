@@ -1,16 +1,23 @@
 <template>
   <div class="wrapper">
     <base-title color="red">LA BOISSON</base-title>
-    <div class="d-flex flex-row align-items-center justify-content-center">
-      <!-- <div class="col"> -->
-      <drink-description-big text-content=""></drink-description-big>
-      <!-- </div> -->
-      <!-- <div class="col"> -->
-      <drink-background>HILDR</drink-background>
-      <!-- </div> -->
-      <!-- <div class="col"> -->
-      <drink-description-small text-content=""></drink-description-small>
-      <!-- </div> -->
+    <div id="flex-container" class="d-flex justify-content-center">
+      <div class="box">
+        <drink-description-big
+          class="pushed-right"
+          text-content="tes"
+          :style="{ bottom: letterHeight + 'px' }"
+        ></drink-description-big>
+      </div>
+      <div class="box">
+        <drink-background ref="drinkBackground">HILDR</drink-background>
+      </div>
+      <div class="box">
+        <drink-description-big
+          class="pushed-left"
+          text-content="test"
+        ></drink-description-big>
+      </div>
     </div>
   </div>
 </template>
@@ -29,8 +36,21 @@ export default {
   components: {
     DrinkBackground,
     BaseTitle,
-    DrinkDescriptionBig,
-    DrinkDescriptionSmall
+    DrinkDescriptionBig
+  },
+  data() {
+    return {
+      letterHeight: 0 // init
+    };
+  },
+  mounted() {
+    this.$nextTick(function() {
+      window.addEventListener("resize", _ => {
+        let drinkNameEl = document.getElementById("text-content");
+        let computedFontSize = window.getComputedStyle(drinkNameEl).fontSize;
+        this.letterHeight = parseFloat(computedFontSize) * 0.69; // the font has a letter height / font size ratio of approx 0.69
+      });
+    });
   }
 };
 </script>
@@ -39,5 +59,24 @@ export default {
 .wrapper {
   position: relative;
   height: calc(100vh - 80px);
+}
+
+#flex-container {
+  align-items: baseline;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+}
+
+.pushed-left {
+  position: relative;
+  margin-right: auto;
+}
+
+.pushed-right {
+  position: relative;
+  margin-left: auto;
 }
 </style>
