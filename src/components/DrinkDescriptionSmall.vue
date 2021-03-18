@@ -1,8 +1,8 @@
 <template>
   <div>
-    {{ title }}
+    <span class="title">{{ title }}</span>
     <span class="line"></span>
-    {{ description }}
+    <span class="description">{{ description }}</span>
   </div>
 </template>
 
@@ -20,5 +20,9 @@ export default {
   position: relative;
   display: inline-block;
   background-color: whitesmoke;
+}
+.description {
+  font-size: 14px;
+  line-height: 0.3em;
 }
 </style>

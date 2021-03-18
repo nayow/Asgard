@@ -1,14 +1,12 @@
 <template>
-  <div class="container-fluid" id="nav">
-    <div class="row g-0">
-      <div class="col">
-        <a href="#home">ASGARD IS A NEW WORLD</a>
-      </div>
-      <div v-show="!ageCheckPage" class="col" id="nav-links">
-        <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
-        <a href="#boisson" data-menuanchor="boisson">BOISSON</a> —
-        <a href="#contact" data-menuanchor="contact">CONTACT</a>
-      </div>
+  <div id="nav">
+    <div class="item">
+      <a href="#home">ASGARD IS A NEW WORLD</a>
+    </div>
+    <div v-show="!ageCheckPage" class="item">
+      <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
+      <a href="#boisson" data-menuanchor="boisson">BOISSON</a> —
+      <a href="#contact" data-menuanchor="contact">CONTACT</a>
     </div>
   </div>
 </template>
@@ -40,10 +38,13 @@ export default {
   background-color: whitesmoke;
   color: black;
   z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
-
-#nav-links {
-  text-align: right;
+.item {
+  padding: 0.5rem;
 }
 
 #nav a {

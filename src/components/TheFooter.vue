@@ -10,7 +10,7 @@ export default {
   name: "TheFooter",
   mounted() {
     const viewportMaxWidth = window.screen.width;
-    const elementWidth = 360; //px
+    const elementWidth = 320; //px
     const elementsNb = Math.floor(viewportMaxWidth / elementWidth) + 2; // always covers over 100vw with 1 entire element out
 
     this.$nextTick(function() {
@@ -60,11 +60,12 @@ export default {
 .wrapper {
   height: 100%;
   z-index: 9;
+  padding: 0.5rem;
 }
 
 .sliding-box {
   position: absolute;
-  width: 360px;
+  width: 320px;
   text-align: center;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
