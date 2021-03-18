@@ -1,20 +1,29 @@
 <template>
   <div>
     <span class="line"></span>
-    {{ textContent.split(" ")[0] }}
-    <br />
-    {{ textContent.split(" ")[1] }}
+    <span :key="word" v-for="word in computedtextContent">
+      {{ word }}<br />
+    </span>
   </div>
 </template>
 
 <script>
 export default {
   name: "DrinkDescriptionBig",
-  props: ["textContent"]
+  props: ["textContent"],
+  computed: {
+    computedtextContent() {
+      return this.$props.textContent.split(" ");
+    }
+  }
 };
 </script>
 
 <style scoped>
+span {
+  font-family: Helvetica, sans-serif;
+  letter-spacing: unset;
+}
 .line {
   width: 100%;
   height: 3px;

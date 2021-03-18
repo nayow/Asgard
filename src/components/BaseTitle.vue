@@ -23,5 +23,6 @@ export default {
 .base-title__content {
   position: absolute;
   padding-top: 3em;
+  font-size: 0.8em;
 }
 </style>

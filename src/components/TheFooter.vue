@@ -10,7 +10,7 @@ export default {
   name: "TheFooter",
   mounted() {
     const viewportMaxWidth = window.screen.width;
-    const elementWidth = 318; //px
+    const elementWidth = 360; //px
     const elementsNb = Math.floor(viewportMaxWidth / elementWidth) + 2; // always covers over 100vw with 1 entire element out
 
     this.$nextTick(function() {
@@ -52,7 +52,7 @@ export default {
   position: fixed;
   bottom: 0px;
   height: 40px;
-  background-color: #009eff;
+  background-color: whitesmoke;
   color: black;
   z-index: 9;
 }
@@ -64,7 +64,7 @@ export default {
 
 .sliding-box {
   position: absolute;
-  width: 318px;
+  width: 360px;
   text-align: center;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */

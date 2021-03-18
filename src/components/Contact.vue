@@ -1,23 +1,30 @@
 <template>
-  <!-- TODO: use flexbox instead -->
   <div class="wrapper">
-    <div class="row justify-content-center">
-      <div class="text-center">CONTACT</div>
+    <div class="item title">
+      CONTACT
     </div>
-    <div class="row align-items-center justify-content-center">
-      <div id="subtext" class="text-center">
-        COLLABORATIONS, DISTRIBUTION, QUESTIONS, NOUS VOUS REPONDRONS
+    <div class="item subtitle col-8">
+      COLLABORATIONS, DISTRIBUTION, QUESTIONS, NOUS VOUS REPONDRONS
+    </div>
+    <div class="row infos">
+      <div class="col col-md-4 col-sm-4 pb-3">
+        <span class="info-title glow--blue">TEL</span>
+        <br />
+        <span class="info-content">0677889966</span>
+      </div>
+      <div class="col col-md-4 col-sm-4 pb-3">
+        <span class="info-title glow--yellow">MAIL</span>
+        <br />
+        <span class="info-content">HELLO@ASGARD.COOL</span>
+      </div>
+      <div class="col col-md-4 col-sm-8">
+        <span class="info-title glow--red">RESEAUX SOCIAUX</span>
+        <br />
+        <span class="info-content">@ASGARD_DRINK</span>
       </div>
     </div>
-    <div class="row align-items-center justify-content-center">
-      <div class="col-sm-5 col-md-3 text-center glow--blue">TEL</div>
-      <div class="col-sm-5 col-md-3 text-center glow--yellow">MAIL</div>
-      <div class="col-5 col-md-3 text-center glow--red">RESEAUX SOCIAUX</div>
-    </div>
-    <div class="row align-items-center justify-content-center">
-      <div class="col-sm-5 col-md-3 text-center">06 77 88 99 66</div>
-      <div class="col-sm-5 col-md-3 text-center">HELLO@ASGARD.COOL</div>
-      <div class="col-5 col-md-3 text-center">@ASGARD_DRINK</div>
+    <div class="item bottom-line">
+      Conditions générales de vente / Mentions légales / Utilisation des cookies
     </div>
   </div>
 </template>
@@ -35,50 +42,59 @@ export default {
 </script>
 
 <style scoped>
-/* reduce space below 'contact' */
-.row:nth-child(1) {
-  margin-bottom: -0.2em;
+.wrapper {
+  position: relative;
+  height: calc(100vh - 40px);
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
-
-.row:nth-child(2) {
-  padding: 0.3em;
-  margin-bottom: 2em;
+.item {
+  text-align: center;
+  flex-shrink: auto;
 }
-
-.row:nth-child(4) {
-  font-size: 1.2em;
+.title {
+  font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  line-height: 1.2;
 }
-
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {
-  .row:nth-child(1) {
+  .title {
     font-size: 50vh;
   }
-  .wrapper {
-    position: relative;
-    top: -10vh;
-  }
 }
-
-/* square-ish screens */
-@media (min-aspect-ratio: 1/1) and (max-aspect-ratio: 12/10) {
-  .row:nth-child(1) {
-    font-size: 35vw;
-  }
-  .wrapper {
-    position: relative;
-    top: 0vh;
-  }
-}
-
 /* tall screens */
-@media (max-aspect-ratio: 1/1) {
-  .row:nth-child(1) {
+@media (max-aspect-ratio: 12/10) {
+  .title {
     font-size: 35vw;
   }
-  .wrapper {
-    position: relative;
-    top: 5vh;
-  }
+}
+.subtitle {
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.infos {
+  width: 80vw;
+  justify-content: space-evenly;
+}
+.info-content {
+  font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 2rem;
+}
+.info-title {
+  font-size: 0.8em;
+}
+.bottom-line {
+  font-size: 0.7rem;
+}
+.col {
+  text-align: center;
+}
+span {
+  line-height: 0.9;
 }
 </style>

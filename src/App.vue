@@ -20,15 +20,17 @@ export default {
 </script>
 
 <style>
+html {
+  font-size: 18px; /* new default rem */
+}
+
 body {
   margin: 0px;
   background-color: black;
-  font-size: 24px; /* new default rem */
-  letter-spacing: 0.1rem;
 }
 
 #app {
-  font-family: Futhark, Helvetica, Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #f5f5f5;

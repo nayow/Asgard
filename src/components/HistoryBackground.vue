@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center overflow-hidden">
+  <div class="">
     <img
       class="side left"
       :style="`transform: rotate(${initialAngleLeft}deg)`"
@@ -47,13 +47,16 @@ export default {
 </script>
 
 <style scoped>
+div {
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
 img {
   z-index: 9;
   height: 80vh;
-}
-
-img.middle {
-  margin-left: 20vw;
-  margin-right: 20vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 </style>

@@ -80,8 +80,6 @@ export default {
     },
     triggerSlide(textWidth) {
       const viewportWidth = document.body.clientWidth;
-      console.log(viewportWidth);
-      console.log(textWidth);
       gsap.to(".slide__text", {
         duration: 10,
         ease: "none",
@@ -122,6 +120,8 @@ svg {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
   width: 100%;
+  font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 #background-statue {

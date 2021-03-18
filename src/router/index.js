@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import VueCookies from "vue-cookies";
 import TheContent from "@/views/TheContent.vue";
 import AgeCheck from "@/views/AgeCheck.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
@@ -7,10 +8,16 @@ import PageNotFound from "@/views/PageNotFound.vue";
 const routes = [
   {
     path: "/",
-    component: TheContent
+    name: "TheContent",
+    component: TheContent,
+    beforeEnter: (to, from) => {
+      if (!VueCookies.isKey("asgard_age_check")) return "/age";
+      return true;
+    }
   },
   {
     path: "/age",
+    name: "AgeCheck",
     component: AgeCheck
   },
   {
@@ -23,10 +30,5 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 });
-
-///
-// router.beforeEach(function(to, from, next)
-//   next() if cookie present
-// });
 
 export default router;

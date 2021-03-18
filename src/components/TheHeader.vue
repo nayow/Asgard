@@ -4,7 +4,7 @@
       <div class="col">
         <a href="#home">ASGARD IS A NEW WORLD</a>
       </div>
-      <div class="col" id="nav-links">
+      <div v-show="!ageCheckPage" class="col" id="nav-links">
         <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
         <a href="#boisson" data-menuanchor="boisson">BOISSON</a> —
         <a href="#contact" data-menuanchor="contact">CONTACT</a>
@@ -15,7 +15,20 @@
 
 <script>
 export default {
-  name: "TheHeader"
+  name: "TheHeader",
+  data() {
+    return {
+      ageCheckPage: true
+    };
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name === "TheContent") {
+        this.ageCheckPage = false;
+        this.$forceUpdate();
+      }
+    }
+  }
 };
 </script>
 
