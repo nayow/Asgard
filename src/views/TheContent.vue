@@ -42,6 +42,10 @@ export default {
           window.fullpage_api.setKeyboardScrolling(false, "down");
           this.$refs.drink.initScrollAnim();
         }
+        if (desti.anchor == "histoire" && dir == "up") {
+          window.fullpage_api.setAllowScrolling(true, "down");
+          window.fullpage_api.setKeyboardScrolling(true, "down");
+        }
       }
     });
   }

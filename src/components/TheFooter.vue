@@ -15,7 +15,6 @@ export default {
 
     this.$nextTick(function() {
       const wrapper = document.querySelector(".wrapper");
-
       // Create correct amount of boxes
       // eslint-disable-next-line no-unused-vars
       [...Array(elementsNb)].map((_, i) => {
@@ -29,12 +28,12 @@ export default {
       gsap.set(".sliding-box", {
         x: i => i * elementWidth
       });
-
+      // eslint-disable-next-line no-unused-vars
       gsap.to(".sliding-box", {
         duration: 15,
         ease: "none",
-        // eslint-disable-next-line prettier/prettier
-        x: "+=" + (elementWidth * (elementsNb-1)), //move each box across
+        // eslint-disable-next-line no-unused-vars
+        x: "-=" + elementWidth * (elementsNb - 1), //move each box across
         modifiers: {
           x: gsap.utils.unitize(
             x => (parseFloat(x) % (elementWidth * elementsNb)) - elementWidth

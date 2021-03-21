@@ -49,7 +49,8 @@ export default {
   },
   data() {
     return {
-      letterHeight: 0 // init
+      letterHeight: 0, // init
+      scrollStep: 0 // increments with each animation
     };
   },
   methods: {
@@ -59,52 +60,61 @@ export default {
       this.letterHeight = parseFloat(computedFontSize) * 0.69; // the font has a letter height / font size ratio of approx 0.69
     },
     initScrollAnim() {
+      let that = this;
       let container = document.getElementById("gsap-container");
 
       function displayBottle() {
         container.addEventListener(
           "wheel",
           function(e) {
-            let gl = gsap.timeline({ onComplete: displayLeft });
-            gl.from(".bottle", {
-              y: "-=200",
-              autoAlpha: 0,
-              ease: "back",
-              duration: 1
-            });
-            gl.to(".bottle", { rotation: 410, ease: "power1.out" }, "<");
+            if (e.deltaY > 0) {
+              let gl = gsap.timeline({ onComplete: displayLeft });
+              gl.from(".bottle", {
+                y: "-=200",
+                autoAlpha: 0,
+                ease: "back",
+                duration: 1
+              });
+              gl.to(".bottle", { rotation: 410, ease: "power1.out" }, "<");
+            }
           },
           { once: true }
         );
       }
 
       function displayLeft() {
+        that.$data.scrollStep = 1;
         container.addEventListener(
           "wheel",
           function(e) {
-            gsap.from(".box-left", {
-              y: "+=500",
-              autoAlpha: 0,
-              duration: 1,
-              ease: "power3.out",
-              onComplete: displayRight
-            });
+            if (e.deltaY > 0) {
+              gsap.from(".box-left", {
+                y: "+=500",
+                autoAlpha: 0,
+                duration: 1,
+                ease: "power3.out",
+                onComplete: displayRight
+              });
+            }
           },
           { once: true }
         );
       }
 
       function displayRight() {
+        that.$data.scrollStep = 2;
         container.addEventListener(
           "wheel",
           function(e) {
-            gsap.from(".box-right", {
-              y: "+=500",
-              autoAlpha: 0,
-              duration: 1,
-              ease: "power3.out",
-              onComplete: allowScrollDown
-            });
+            if (e.deltaY > 0) {
+              gsap.from(".box-right", {
+                y: "+=500",
+                autoAlpha: 0,
+                duration: 1,
+                ease: "power3.out",
+                onComplete: allowScrollDown
+              });
+            }
           },
           { once: true }
         );
@@ -114,10 +124,18 @@ export default {
         setTimeout(function() {
           window.fullpage_api.setAllowScrolling(true, "down");
           window.fullpage_api.setKeyboardScrolling(true, "down");
-        }, 1000);
+        }, 600);
       }
 
-      displayBottle();
+      // if user scrolls back up too early it will retrieve its latest position
+      switch (that.$data.scrollStep) {
+        case 0:
+          return displayBottle();
+        case 1:
+          return displayLeft();
+        case 2:
+          return displayRight();
+      }
     }
   },
   mounted() {
