@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="line"></span>
+    <hr />
     <span :key="word" v-for="word in computedtextContent">
       {{ word }}<br />
     </span>
@@ -20,15 +20,17 @@ export default {
 </script>
 
 <style scoped>
+div {
+  margin-bottom: 1rem;
+}
 span {
   font-family: Helvetica, sans-serif;
   letter-spacing: unset;
 }
-.line {
-  width: 100%;
-  height: 3px;
-  position: relative;
-  display: inline-block;
-  background-color: whitesmoke;
+hr {
+  border: 2px solid whitesmoke;
+  opacity: 1;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 </style>

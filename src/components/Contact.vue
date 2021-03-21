@@ -1,4 +1,5 @@
 <template>
+  <img class="sphere" src="@/assets/sphere.png" />
   <div class="wrapper">
     <div class="item title">
       CONTACT
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
 export default {
   name: "Contact",
   components: {},
@@ -37,11 +39,77 @@ export default {
     return {
       style: {}
     };
+  },
+  methods: {
+    animateSphere() {
+      // vars
+      const randomX = random(10, 20);
+      const randomY = random(20, 30);
+      const randomDelay = random(0, 1);
+      const randomTime = random(3, 5);
+      const randomTime2 = random(5, 10);
+      const randomAngle = random(8, 12);
+      const tl = gsap.timeline();
+
+      // functions
+      function rotate(target, direction) {
+        tl.to(target, {
+          rotation: randomAngle(direction),
+          // delay: randomDelay(),
+          ease: "Sine.easeInOut",
+          duration: randomTime2(),
+          onComplete: rotate,
+          onCompleteParams: [target, direction * -1]
+        });
+      }
+      function moveX(target, direction) {
+        tl.to(target, {
+          x: randomX(direction),
+          ease: "Sine.easeInOut",
+          duration: randomTime(),
+          onComplete: moveX,
+          onCompleteParams: [target, direction * -1]
+        });
+      }
+      function moveY(target, direction) {
+        gsap.to(target, {
+          y: randomY(direction),
+          ease: "Sine.easeInOut",
+          duration: randomTime(),
+          onComplete: moveY,
+          onCompleteParams: [target, direction * -1]
+        });
+      }
+      function random(min, max) {
+        const delta = max - min;
+        return (direction = 1) => (min + delta * Math.random()) * direction;
+      }
+
+      // init
+      gsap.set(".sphere", {
+        x: randomX(-1),
+        y: randomX(1),
+        rotation: randomAngle(-1)
+      });
+      moveX(".sphere", 1);
+      moveY(".sphere", -1);
+      rotate(".sphere", 1);
+    }
+  },
+  mounted() {
+    let x = gsap.utils.random(50, 70) + "vw";
+    gsap.to(".sphere", { left: x, bottom: "50vh" });
+    this.animateSphere();
   }
 };
 </script>
 
 <style scoped>
+.sphere {
+  position: absolute;
+  height: 30vh;
+  z-index: 9;
+}
 .wrapper {
   position: relative;
   height: calc(100vh - 40px);
@@ -89,7 +157,8 @@ export default {
   font-size: 0.8em;
 }
 .bottom-line {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
+  color: #707070;
 }
 .col {
   text-align: center;

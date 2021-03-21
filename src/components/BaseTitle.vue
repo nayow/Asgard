@@ -1,9 +1,8 @@
 <template>
-  <div
-    class="base-title__content d-flex w-100 justify-content-center"
-    :class="glowColor"
-  >
-    <slot></slot>
+  <div class="base-title__content d-flex w-100 justify-content-center">
+    <span :class="glowColor">
+      <slot></slot>
+    </span>
   </div>
 </template>
 
@@ -23,6 +22,5 @@ export default {
 .base-title__content {
   position: absolute;
   padding-top: 3em;
-  font-size: 0.8em;
 }
 </style>

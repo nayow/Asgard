@@ -1,25 +1,28 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div class="wrapper" id="gsap-container">
     <base-title color="red">LA BOISSON</base-title>
     <div id="flex-container" class="d-flex">
       <div class="box-left">
         <drink-description-big
-          class="pushed-right"
           text-content="COCKTAIL ENERGISANT"
         ></drink-description-big>
         <drink-description-big
-          class="pushed-right"
           text-content="GIN GINGEMBRE"
         ></drink-description-big>
       </div>
       <div class="box-center">
         <drink-background ref="drinkBackground">HILDR</drink-background>
+        <img class="bottle" src="@/assets/hildr.png" />
       </div>
       <div class="box-right">
         <drink-description-small
-          class="pushed-left"
           title="Descriptif"
           description="Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans ce lieu, des clans se sont formés autour de chacunes des déesses. Mais alors que ces clans se donnaient à une guerre éternelle, un portail s’est ouvert vers notre monde."
+        ></drink-description-small>
+        <drink-description-small
+          title="Descriptif technique"
+          :description="['33CL', '5°', 'France']"
         ></drink-description-small>
       </div>
     </div>
@@ -27,6 +30,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line prettier/prettier
 import DrinkBackground from "./DrinkBackground.vue";
 import BaseTitle from "./BaseTitle.vue";
 import { gsap } from "gsap";
@@ -54,105 +58,66 @@ export default {
       let computedFontSize = window.getComputedStyle(drinkNameEl).fontSize;
       this.letterHeight = parseFloat(computedFontSize) * 0.69; // the font has a letter height / font size ratio of approx 0.69
     },
-    // anim() {
-    //   let tl = gsap.timeline();
-    //   tl.from([".box-left"], {
-    //     autoAlpha: 0,
-    //     duration: 1,
-    //     ease: "expo.inOut"
-    //   });
-    //   tl.from([".box-right"], {
-    //     autoAlpha: 0,
-    //     duration: 2,
-    //     ease: "expo.inOut"
-    //   });
-    // },
-    // updateScrollAnim() {},
-    // initScrollAnim() {
-    //   const scroller = document.getElementById("fullpage");
-
-    //   function getScrollPosition() {
-    //     const transform = scroller.style.transform;
-    //     const position = transform.replace(/[^0-9\-.,]/g, "").split(",");
-    //     return position[1] * -1; //
-    //   }
-
-    //   ScrollTrigger.scrollerProxy(scroller, {
-    //     scrollTop(value) {
-    //       return arguments.length
-    //         ? scroller.scrollTo(value)
-    //         : getScrollPosition();
-    //     },
-    //     getBoundingClientRect() {
-    //       return {
-    //         top: 0,
-    //         left: 0,
-    //         width: window.innerWidth,
-    //         height: window.innerHeight
-    //       };
-    //     }
-    //   });
-
-    //   scroller.addEventListener("wheel", () => ScrollTrigger.update);
-
-    //   ScrollTrigger.addEventListener("refresh", function() {
-    //     window.fullpage_api.reBuild();
-    //   });
-
-    //   let timeline = gsap.timeline({
-    //     scrollTrigger: {
-    //       scroller: scroller,
-    //       trigger: "#gsap-container",
-    //       start: "top top+=80px",
-    //       end: "+=100%",
-    //       scrub: true,
-    //       pin: true,
-    //       onEnter: _ => console.log("enter"),
-    //       onLeave: _ => console.log("leave")
-    //     }
-    //   });
-    //   timeline
-    //     .from(".box-left", { autoAlpha: 0, duration: 2 })
-    //     .from(".box-right", { autoAlpha: 0, duration: 2 });
-    // },
-
-    // anims in order
-
-    triggerScrollAnim() {
-      let tl = gsap.timeline();
+    initScrollAnim() {
       let container = document.getElementById("gsap-container");
 
-      container.addEventListener(
-        "wheel",
-        function(e) {
-          gsap
-            .from(".box-left", {
+      function displayBottle() {
+        container.addEventListener(
+          "wheel",
+          function(e) {
+            let gl = gsap.timeline({ onComplete: displayLeft });
+            gl.from(".bottle", {
+              y: "-=200",
+              autoAlpha: 0,
+              ease: "back",
+              duration: 1
+            });
+            gl.to(".bottle", { rotation: 410, ease: "power1.out" }, "<");
+          },
+          { once: true }
+        );
+      }
+
+      function displayLeft() {
+        container.addEventListener(
+          "wheel",
+          function(e) {
+            gsap.from(".box-left", {
+              y: "+=500",
               autoAlpha: 0,
               duration: 1,
-              ease: "expo.inOut"
-            })
-            .then(() => {
-              container.addEventListener(
-                "wheel",
-                function(e) {
-                  gsap.from(".box-right", {
-                    autoAlpha: 0,
-                    duration: 1,
-                    ease: "bounce"
-                  });
-                },
-                { once: true }
-              );
-            })
-            .then(() => {
-              setTimeout(function() {
-                window.fullpage_api.setAllowScrolling(true, "down");
-                window.fullpage_api.setKeyboardScrolling(true, "down");
-              }, 1000);
+              ease: "power3.out",
+              onComplete: displayRight
             });
-        },
-        { once: true }
-      );
+          },
+          { once: true }
+        );
+      }
+
+      function displayRight() {
+        container.addEventListener(
+          "wheel",
+          function(e) {
+            gsap.from(".box-right", {
+              y: "+=500",
+              autoAlpha: 0,
+              duration: 1,
+              ease: "power3.out",
+              onComplete: allowScrollDown
+            });
+          },
+          { once: true }
+        );
+      }
+
+      function allowScrollDown() {
+        setTimeout(function() {
+          window.fullpage_api.setAllowScrolling(true, "down");
+          window.fullpage_api.setKeyboardScrolling(true, "down");
+        }, 1000);
+      }
+
+      displayBottle();
     }
   },
   mounted() {
@@ -170,6 +135,12 @@ export default {
 </script>
 
 <style scoped>
+.bottle {
+  position: absolute;
+  height: 90vh;
+  visibility: hidden;
+}
+
 .wrapper {
   position: relative;
   height: calc(100vh - 80px);
@@ -179,27 +150,19 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100%; /* of wrapper */
+  line-height: 1.2;
 }
 
 .box-left,
 .box-right {
-  flex-basis: 10%;
+  flex-basis: 14%;
   visibility: hidden;
 }
 
 .box-center {
+  display: flex; /** to center children */
+  justify-content: center;
+  align-items: center;
   flex-basis: 30%;
-}
-
-.pushed-left {
-  position: relative;
-  margin-right: auto;
-  flex: 0 0 15vw;
-}
-
-.pushed-right {
-  position: relative;
-  margin-left: auto;
-  flex: 0 0 15vw;
 }
 </style>

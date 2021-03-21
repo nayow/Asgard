@@ -54,8 +54,7 @@ export default {
 
 /* dynamically added by fullpage.js */
 #nav a.active {
-  background-color: #000;
-  color: whitesmoke;
+  font-weight: 900;
 }
 
 #nav a.div-exact-active {
