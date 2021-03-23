@@ -1,8 +1,14 @@
 <template>
-  <div class="">
-    <img class="side left" src="@/assets/statue2.png" />
-    <img class="middle" src="@/assets/statue2.png" />
-    <img class="side right" src="@/assets/statue2.png" />
+  <div class="statue-container">
+    <div class="statue">
+      <img class="left" src="@/assets/statue2.png" />
+    </div>
+    <div class="statue">
+      <img class="middle" src="@/assets/statue2.png" />
+    </div>
+    <div class="statue">
+      <img class="right" src="@/assets/statue2.png" />
+    </div>
   </div>
 </template>
 
@@ -16,42 +22,37 @@ export default {
   methods: {
     animateStatues() {
       // vars
-      const randomX = random(5, 10);
-      const randomY = random(5, 10);
+      const randomX = random(1, 10);
+      const randomY = random(1, 10);
       const randomDelay = random(0, 1);
-      const randomTime = random(1, 3);
-      const randomTime2 = random(2, 4);
-      const randomAngle = random(3, 6);
-      const tl = gsap.timeline();
+      const randomTime = random(3, 5);
+      const randomTime2 = random(5, 10);
+      const randomAngle = random(-4, 4);
 
       // functions
-      function moveX(target, direction, delay) {
-        tl.to(target, {
+      function moveX(target, direction) {
+        gsap.to(target, {
           x: "+=" + randomX(direction),
           ease: "Sine.easeInOut",
-          duration: randomTime(),
-          delay: delay,
+          duration: 2,
           onComplete: moveX,
           onCompleteParams: [target, direction * -1]
         });
       }
-      function moveY(target, direction, delay) {
-        tl.to(target, {
+      function moveY(target, direction) {
+        gsap.to(target, {
           y: "+=" + randomY(direction),
           ease: "Sine.easeInOut",
-          duration: randomTime(),
-          delay: delay,
+          duration: 2,
           onComplete: moveY,
           onCompleteParams: [target, direction * -1]
         });
       }
-      function rotate(target, direction, delay) {
-        tl.to(target, {
+      function rotate(target, direction) {
+        gsap.to(target, {
           rotation: "+=" + randomAngle(direction),
-          // delay: randomDelay(),
           ease: "Sine.easeInOut",
-          duration: randomTime2(),
-          delay: delay,
+          duration: 2,
           onComplete: rotate,
           onCompleteParams: [target, direction * -1]
         });
@@ -62,30 +63,19 @@ export default {
       }
 
       // init
-      gsap.set("img.left", {
-        x: randomX(-1),
-        y: randomX(1),
-        rotation: "+=" + randomAngle(-1)
+
+      const statues = gsap.utils.toArray(".statue > img");
+      statues.forEach(statue => {
+        gsap.set(statue, {
+          // x: randomX(-1),
+          // y: randomX(1)
+          // rotation: randomAngle(-1)
+        });
+
+        moveX(statue, 1);
+        moveY(statue, -1);
+        rotate(statue, 1);
       });
-      gsap.set("img.middle", {
-        x: randomX(-1),
-        y: randomX(1),
-        rotation: "+=" + randomAngle(1)
-      });
-      gsap.set("img.right", {
-        x: randomX(-1),
-        y: randomX(1),
-        rotation: "+=" + randomAngle(-1)
-      });
-      moveX("img.left", 1, 0);
-      moveX("img.middle", -1, 0.1);
-      moveX("img.right", 1, 0.2);
-      moveY("img.left", -1, 0);
-      moveY("img.middle", +1, 0.1);
-      moveY("img.right", -1, 0.2);
-      rotate("img.left", 1, 0);
-      rotate("img.middle", -1, 0.2);
-      rotate("img.right", 1, 0.1);
     }
   },
   mounted() {
@@ -95,8 +85,7 @@ export default {
 </script>
 
 <style scoped>
-div {
-  /* position: absolute; */
+.statue-container {
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -107,13 +96,13 @@ img {
   margin-left: 10vw;
   margin-right: 10vw;
 }
-img.left {
+.left {
   transform: rotate(150deg);
 }
-img.middle {
+.middle {
   transform: rotate(70deg);
 }
-img.right {
+.right {
   transform: rotate(230deg);
 }
 </style>

@@ -7,15 +7,15 @@
   animation: glow--blue 1.5s ease-in-out infinite alternate;
   letter-spacing: 2px;
   font-weight: bolder;
+  text-shadow: 0 0 15px #95b1ff, 0 0 20px #95b1ff, 0 0 30px #95b1ff, 0 0 40px #0026ff, 0 0 70px #0026ff, 0 0 80px #0026ff, 0 0 100px #0026ff, 0 0 150px #0026ff;
 }
-@keyframes aglow--blue {
-  from {
-    text-shadow: 0 0 15px #95b1ff, 0 0 20px #95b1ff, 0 0 30px #95b1ff, 0 0 40px #0026ff, 0 0 70px #0026ff, 0 0 80px #0026ff, 0 0 100px #0026ff, 0 0 150px #0026ff;
-  }
-  to {
-    text-shadow: 0 0 5px #95b1ff, 0 0 10px #95b1ff, 0 0 15px #95b1ff, 0 0 20px #0026ff, 0 0 35px #0026ff, 0 0 40px #0026ff, 0 0 50px #0026ff, 0 0 75px #FF1177;
-  }
-}
+// @keyframes aglow--blue {
+//   from {
+//   }
+//   to {
+//     text-shadow: 0 0 5px #95b1ff, 0 0 10px #95b1ff, 0 0 15px #95b1ff, 0 0 20px #0026ff, 0 0 35px #0026ff, 0 0 40px #0026ff, 0 0 50px #0026ff, 0 0 75px #FF1177;
+//   }
+// }
 
 .glow--red {
   color: #ff0000;
@@ -24,15 +24,15 @@
   animation: glow--red 1.5s ease-in-out infinite alternate;
   letter-spacing: 2px;
   font-weight: bolder;
+  text-shadow: 0 0 15px #ff8888a6, 0 0 20px #ff8888a6, 0 0 30px #ff8888a6, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
 } 
-@keyframes aglow--red {
-  from {
-    text-shadow: 0 0 15px #ff8888a6, 0 0 20px #ff8888a6, 0 0 30px #ff8888a6, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
-  }
-  to {
-    text-shadow: 0 0 5px #ff8888a6, 0 0 10px #ff8888a6, 0 0 15px #ff8888a6, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
-  }
-}
+// @keyframes aglow--red {
+//   from {
+//   }
+//   to {
+//     text-shadow: 0 0 5px #ff8888a6, 0 0 10px #ff8888a6, 0 0 15px #ff8888a6, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+//   }
+// }
 
 .glow--green {
   color: #17c700;
@@ -41,10 +41,10 @@
   animation: glow--green 1.5s ease-in-out infinite alternate;
   letter-spacing: 2px;
   font-weight: bolder;
+  text-shadow: 0 0 15px #9ddf7f, 0 0 20px #9ddf7f, 0 0 30px #9ddf7f, 0 0 40px #19ff11, 0 0 70px #19ff11, 0 0 80px #19ff11, 0 0 100px #19ff11, 0 0 150px #19ff11;
 }
 @keyframes aglow--green {
   from {
-    text-shadow: 0 0 15px #9ddf7f, 0 0 20px #9ddf7f, 0 0 30px #9ddf7f, 0 0 40px #FF1177, 0 0 70px #19ff11, 0 0 80px #19ff11, 0 0 100px #19ff11, 0 0 150px #19ff11;
   }
   to {
     text-shadow: 0 0 5px #9ddf7f, 0 0 10px #9ddf7f, 0 0 15px #9ddf7f, 0 0 20px #19ff11, 0 0 35px #19ff11, 0 0 40px #19ff11, 0 0 50px #19ff11, 0 0 75px #19ff11;
@@ -58,13 +58,13 @@
   animation: glow--yellow 1.5s ease-in-out infinite alternate;
   letter-spacing: 2px;
   font-weight: bolder;
+  text-shadow: 0 0 15px #ffe281, 0 0 20px #ffe281, 0 0 30px #ffe281, 0 0 40px #ffee00, 0 0 70px #ffee00, 0 0 80px #ffee00, 0 0 100px #ffee00, 0 0 150px #ffee00;
 }
-@keyframes aglow--yellow {
-  from {
-    text-shadow: 0 0 15px #ffe281, 0 0 20px #ffe281, 0 0 30px #ffe281, 0 0 40px #ffee00, 0 0 70px #ffee00, 0 0 80px #ffee00, 0 0 100px #ffee00, 0 0 150px #ffee00;
-  }
-  to {
-    text-shadow: 0 0 5px #ffe281, 0 0 10px #ffe281, 0 0 15px #ffe281, 0 0 20px #ffee00, 0 0 35px #ffee00, 0 0 40px #ffee00, 0 0 50px #ffee00, 0 0 75px #ffee00;
-  }
-}
+// @keyframes aglow--yellow {
+//   from {
+//   }
+//   to {
+//     text-shadow: 0 0 5px #ffe281, 0 0 10px #ffe281, 0 0 15px #ffe281, 0 0 20px #ffee00, 0 0 35px #ffee00, 0 0 40px #ffee00, 0 0 50px #ffee00, 0 0 75px #ffee00;
+//   }
+// }
 
