@@ -27,7 +27,7 @@ export default {
       // functions
       function moveX(target, direction, delay) {
         tl.to(target, {
-          x: "=+" + randomX(direction),
+          x: "+=" + randomX(direction),
           ease: "Sine.easeInOut",
           duration: randomTime(),
           delay: delay,
@@ -36,7 +36,7 @@ export default {
         });
       }
       function moveY(target, direction, delay) {
-        gsap.to(target, {
+        tl.to(target, {
           y: "+=" + randomY(direction),
           ease: "Sine.easeInOut",
           duration: randomTime(),

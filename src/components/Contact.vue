@@ -1,7 +1,8 @@
 <template>
   <img class="sphere" src="@/assets/sphere.png" />
+  <base-title color="green">CONTACTEZ-NOUS</base-title>
   <div class="wrapper">
-    <div class="item title">
+    <div class="item contact-title">
       CONTACT
     </div>
     <div class="item subtitle col-8">
@@ -31,10 +32,13 @@
 </template>
 
 <script>
+import BaseTitle from "./BaseTitle.vue";
 import { gsap } from "gsap";
 export default {
   name: "Contact",
-  components: {},
+  components: {
+    BaseTitle
+  },
   data() {
     return {
       style: {}
@@ -72,7 +76,7 @@ export default {
         });
       }
       function moveY(target, direction) {
-        gsap.to(target, {
+        tl.to(target, {
           y: randomY(direction),
           ease: "Sine.easeInOut",
           duration: randomTime(),
@@ -123,20 +127,20 @@ export default {
   text-align: center;
   flex-shrink: auto;
 }
-.title {
+.contact-title {
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   line-height: 1.2;
 }
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {
-  .title {
+  .contact-title {
     font-size: 50vh;
   }
 }
 /* tall screens */
 @media (max-aspect-ratio: 12/10) {
-  .title {
+  .contact-title {
     font-size: 35vw;
   }
 }

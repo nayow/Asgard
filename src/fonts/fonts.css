@@ -3,3 +3,8 @@
   src: local("Futhark"),
   url(./futhark-regular.otf) format("opentype");
 }
+@font-face {
+  font-family: "Univers";
+  src: local("Univers"),
+  url(./UniversLTStd.otf) format("opentype");
+}

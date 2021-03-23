@@ -14,7 +14,9 @@
       (article L3353-4 du code de la santé publique)
     </div>
     <div class="item buttons col-8 col-lg-6">
-      <button class="button button1">J'AI — DE 18 ANS</button>
+      <button class="button button1" @click="closeWindow">
+        J'AI — DE 18 ANS
+      </button>
       <button class="button button2" @click="allowAccess">
         J'AI + DE 18 ANS
       </button>
@@ -30,6 +32,9 @@ export default {
     allowAccess() {
       VueCookies.set("asgard_age_check", "allowed", 0);
       this.$router.push("/");
+    },
+    closeWindow() {
+      this.$closeWindow;
     }
   }
 };

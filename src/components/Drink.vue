@@ -78,7 +78,7 @@ export default {
               gl.to(".bottle", { rotation: 410, ease: "power1.out" }, "<");
             }
           },
-          { once: true }
+          { once: true, passive: true }
         );
       }
 
@@ -97,7 +97,7 @@ export default {
               });
             }
           },
-          { once: true }
+          { once: true, passive: true }
         );
       }
 
@@ -116,7 +116,7 @@ export default {
               });
             }
           },
-          { once: true }
+          { once: true, passive: true }
         );
       }
 

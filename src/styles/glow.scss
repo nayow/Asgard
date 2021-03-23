@@ -2,13 +2,13 @@
 
 .glow--blue {
   color: #009eff;
-  -webkit-animation: glow--blue 1s ease-in-out infinite alternate;
-  -moz-animation: glow--blue 1s ease-in-out infinite alternate;
-  animation: glow--blue 1s ease-in-out infinite alternate;
+  -webkit-animation: glow--blue 1.5s ease-in-out infinite alternate;
+  -moz-animation: glow--blue 1.5s ease-in-out infinite alternate;
+  animation: glow--blue 1.5s ease-in-out infinite alternate;
   letter-spacing: 2px;
   font-weight: bolder;
 }
-@keyframes glow--blue {
+@keyframes aglow--blue {
   from {
     text-shadow: 0 0 15px #95b1ff, 0 0 20px #95b1ff, 0 0 30px #95b1ff, 0 0 40px #0026ff, 0 0 70px #0026ff, 0 0 80px #0026ff, 0 0 100px #0026ff, 0 0 150px #0026ff;
   }
@@ -25,7 +25,7 @@
   letter-spacing: 2px;
   font-weight: bolder;
 } 
-@keyframes glow--red {
+@keyframes aglow--red {
   from {
     text-shadow: 0 0 15px #ff8888a6, 0 0 20px #ff8888a6, 0 0 30px #ff8888a6, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
   }
@@ -36,30 +36,30 @@
 
 .glow--green {
   color: #17c700;
-  -webkit-animation: glow--green 1s ease-in-out infinite alternate;
-  -moz-animation: glow--green 1s ease-in-out infinite alternate;
-  animation: glow--green 1s ease-in-out infinite alternate;
+  -webkit-animation: glow--green 1.5s ease-in-out infinite alternate;
+  -moz-animation: glow--green 1.5s ease-in-out infinite alternate;
+  animation: glow--green 1.5s ease-in-out infinite alternate;
   letter-spacing: 2px;
   font-weight: bolder;
 }
-@keyframes glow--green {
+@keyframes aglow--green {
   from {
-    text-shadow: 0 0 15px #b5ffa2, 0 0 20px #b5ffa2, 0 0 30px #b5ffa2, 0 0 40px #15ff00, 0 0 70px #15ff00, 0 0 80px #15ff00, 0 0 100px #15ff00, 0 0 150px #15ff00;
+    text-shadow: 0 0 15px #9ddf7f, 0 0 20px #9ddf7f, 0 0 30px #9ddf7f, 0 0 40px #FF1177, 0 0 70px #19ff11, 0 0 80px #19ff11, 0 0 100px #19ff11, 0 0 150px #19ff11;
   }
   to {
-    text-shadow: 0 0 5px #b5ffa2, 0 0 10px #b5ffa2, 0 0 15px #b5ffa2, 0 0 20px #15ff00, 0 0 35px #15ff00, 0 0 40px #15ff00, 0 0 50px #15ff00, 0 0 75px #15ff00;
+    text-shadow: 0 0 5px #9ddf7f, 0 0 10px #9ddf7f, 0 0 15px #9ddf7f, 0 0 20px #19ff11, 0 0 35px #19ff11, 0 0 40px #19ff11, 0 0 50px #19ff11, 0 0 75px #19ff11;
   }
 }
 
 .glow--yellow {
   color: #ffee00;
-  -webkit-animation: glow--yellow 1s ease-in-out infinite alternate;
-  -moz-animation: glow--yellow 1s ease-in-out infinite alternate;
-  animation: glow--yellow 1s ease-in-out infinite alternate;
+  -webkit-animation: glow--yellow 1.5s ease-in-out infinite alternate;
+  -moz-animation: glow--yellow 1.5s ease-in-out infinite alternate;
+  animation: glow--yellow 1.5s ease-in-out infinite alternate;
   letter-spacing: 2px;
   font-weight: bolder;
 }
-@keyframes glow--yellow {
+@keyframes aglow--yellow {
   from {
     text-shadow: 0 0 15px #ffe281, 0 0 20px #ffe281, 0 0 30px #ffe281, 0 0 40px #ffee00, 0 0 70px #ffee00, 0 0 80px #ffee00, 0 0 100px #ffee00, 0 0 150px #ffee00;
   }
