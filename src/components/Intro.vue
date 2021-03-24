@@ -1,16 +1,15 @@
 <template>
-  <div class="wrapper">
-    <div class="title title-left">
-      ASGARD
-    </div>
-    <div class="title title-left">
-      ASGARD
-    </div>
-    <div class="title title-right">
-      ASGARD
-    </div>
-    <div class="title title-right">
-      ASGARD
+  <div class="wrapper" id="cc">
+    <div class="asgard-container">
+      <div class="asgard asgard-left">
+        ASGARD
+      </div>
+      <div class="asgard asgard-middle">
+        ASGARD
+      </div>
+      <div class="asgard asgard-right">
+        ASGARD
+      </div>
     </div>
     <svg>
       <defs>
@@ -57,17 +56,12 @@ export default {
     // },
     triggerSlide() {
       const CSSfontSize = 110;
-      const textWidth = CSSfontSize * 13.8; // 13.8 is font-size to width ratio
-      const elementsNb = 3;
-      const viewportMaxWidth = window.screen.width;
-      gsap.set(".title-left", {
-        x: i => -1 * (i + 1) * textWidth
+      let textWidth = CSSfontSize * 18; // 13.8 is font-size to width ratio so we take more to have space
+      gsap.set(".asgard", {
+        x: i => (i - 1) * textWidth
       });
-      gsap.set(".title-right", {
-        x: i => viewportMaxWidth + i * textWidth
-      });
-      const windowWrap = gsap.utils.wrap(textWidth * -2, textWidth * 2);
-      gsap.to(".title", {
+      let windowWrap = gsap.utils.wrap(textWidth * -1, textWidth);
+      gsap.to(".asgard", {
         x: "-=10000px",
         ease: "none",
         repeat: -1,
@@ -110,7 +104,7 @@ export default {
   margin-top: 40px;
 }
 
-.title {
+.asgard {
   position: absolute;
   top: -53.5vh;
   font-size: 110vh;

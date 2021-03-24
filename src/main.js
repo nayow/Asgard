@@ -6,4 +6,4 @@ import router from "./router";
 
 const app = createApp(App);
 app.use(router).mount("#app");
-app.config.globalProperties.$closeWindow = window.open("", "_self").close();
+app.config.globalProperties.$closeWindow = () => {};

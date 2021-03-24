@@ -1,15 +1,15 @@
 <template>
   <div v-if="Array.isArray(description)">
-    <span class="title">{{ title.toUpperCase() }}</span>
+    <span>{{ title.toUpperCase() }}</span>
     <hr />
     <span v-for="item in description" :key="item" class="description">
       {{ item }} <br />
     </span>
   </div>
   <div v-else>
-    <span class="title">{{ title.toUpperCase() }}</span>
+    <span>{{ title.toUpperCase() }}</span>
     <hr />
-    <span class="description">{{ description }}</span>
+    <span>{{ description }}</span>
   </div>
 </template>
 

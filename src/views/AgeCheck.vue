@@ -34,7 +34,7 @@ export default {
       this.$router.push("/");
     },
     closeWindow() {
-      this.$closeWindow;
+      // this.$closeWindow();
     }
   }
 };
