@@ -17,6 +17,7 @@
 
 <script>
 import fullpage from "fullpage.js";
+import easings from "fullpage.js/vendors/easings.js";
 import Intro from "@/components/Intro.vue";
 import History from "@/components/History.vue";
 import Drink from "@/components/Drink.vue";
@@ -35,6 +36,7 @@ export default {
       licenseKey: "abc",
       anchors: ["home", "histoire", "boisson", "contact"],
       responsiveWidth: 600,
+      scrollingSpeed: 1200,
       menu: "#nav",
       afterLoad: (orig, desti, dir) => {
         if (desti.anchor == "boisson" && dir == "down") {
