@@ -63,6 +63,51 @@ export default {
       let that = this;
       let container = document.getElementById("gsap-container");
 
+      function animateBottle() {
+        // vars
+        const randomX = random(0, 10);
+        const randomY = random(5, 10);
+        const randomAngle = random(-4, 4);
+
+        // functions
+        function moveX(target, direction) {
+          gsap.to(target, {
+            x: "+=" + randomX(direction),
+            ease: "Sine.easeInOut",
+            duration: 3,
+            onComplete: moveX,
+            onCompleteParams: [target, direction * -1]
+          });
+        }
+        function moveY(target, direction) {
+          gsap.to(target, {
+            y: "+=" + randomY(direction),
+            ease: "Sine.easeInOut",
+            duration: 2,
+            onComplete: moveY,
+            onCompleteParams: [target, direction * -1]
+          });
+        }
+        function rotate(target, direction) {
+          gsap.to(target, {
+            rotation: "+=" + randomAngle(direction),
+            ease: "Sine.easeInOut",
+            duration: 3,
+            onComplete: rotate,
+            onCompleteParams: [target, direction * -1]
+          });
+        }
+        function random(min, max) {
+          const delta = max - min;
+          return (direction = 1) => (min + delta * Math.random()) * direction;
+        }
+
+        // init
+        moveX(".bottle", 1);
+        moveY(".bottle", -1);
+        rotate(".bottle", 1);
+      }
+
       function displayBottle() {
         container.addEventListener(
           "wheel",
@@ -73,9 +118,9 @@ export default {
                 y: "-=200",
                 autoAlpha: 0,
                 ease: "back",
-                duration: 1
+                duration: 3
               });
-              gl.to(".bottle", { rotation: 410, ease: "power1.out" }, "<");
+              gl.to(".bottle", { rotation: 410, ease: "none" }, "<");
             }
           },
           { once: true, passive: true }
@@ -84,6 +129,7 @@ export default {
 
       function displayLeft() {
         that.$data.scrollStep = 1;
+        animateBottle();
         container.addEventListener(
           "wheel",
           function(e) {

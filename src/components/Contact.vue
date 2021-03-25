@@ -1,5 +1,5 @@
 <template>
-  <img class="sphere" src="@/assets/sphere.png" />
+  <img ref="sphere" class="sphere" src="@/assets/sphere.png" />
   <base-title color="green">CONTACTEZ-NOUS</base-title>
   <div class="wrapper">
     <div class="item contact-title">
@@ -12,17 +12,23 @@
       <div class="col col-md-4 col-sm-4 pb-3">
         <span class="info-title glow--blue">TEL</span>
         <br />
-        <span class="info-content">0677889966</span>
+        <span class="info-content"
+          ><a href="tel:0650876003">0650876003</a></span
+        >
       </div>
       <div class="col col-md-4 col-sm-4 pb-3">
         <span class="info-title glow--yellow">MAIL</span>
         <br />
-        <span class="info-content">HELLO@ASGARD.COOL</span>
+        <span class="info-content"
+          ><a href="mailto:hello@asgard.cool">HELLO@ASGARD.COOL</a></span
+        >
       </div>
       <div class="col col-md-4 col-sm-8">
         <span class="info-title glow--red">RESEAUX SOCIAUX</span>
         <br />
-        <span class="info-content">@ASGARD_DRINK</span>
+        <span class="info-content"
+          ><a href="https://instagram.com/asgard_drink/">@ASGARD_DRINK</a></span
+        >
       </div>
     </div>
     <div class="item bottom-line">
@@ -39,48 +45,53 @@ export default {
   components: {
     BaseTitle
   },
-  data() {
-    return {
-      style: {}
-    };
-  },
   methods: {
     animateSphere() {
       // vars
-      const randomX = random(10, 20);
-      const randomY = random(20, 30);
-      const randomDelay = random(0, 1);
-      const randomTime = random(3, 5);
+      const sphereWidth = this.$refs.sphere.clientWidth;
+      const maxX = window.innerWidth - sphereWidth;
+      const maxY = window.innerHeight - sphereWidth;
+      const wrapX = gsap.utils.wrapYoyo(0, maxX);
+      const wrapY = gsap.utils.wrapYoyo(0, maxY);
+      const randomX = random(0, maxX);
+      const randomY = random(0, maxY);
+      const randomTime = random(10, 20);
       const randomTime2 = random(5, 10);
-      const randomAngle = random(8, 12);
-      const tl = gsap.timeline();
+      const randomAngle = random(-180, 180);
 
       // functions
-      function rotate(target, direction) {
-        tl.to(target, {
-          rotation: randomAngle(direction),
-          // delay: randomDelay(),
-          ease: "Sine.easeInOut",
-          duration: randomTime2(),
-          onComplete: rotate,
-          onCompleteParams: [target, direction * -1]
-        });
-      }
       function moveX(target, direction) {
-        tl.to(target, {
-          x: randomX(direction),
-          ease: "Sine.easeInOut",
+        gsap.to(target, {
+          x: randomX(),
+          ease: "power3.easeInOut",
           duration: randomTime(),
+          modifiers: (x, y) => {
+            wrapX(parseFloat(x)) + "px";
+            wrapY(parseFloat(y)) + "px";
+          },
           onComplete: moveX,
-          onCompleteParams: [target, direction * -1]
+          onCompleteParams: [target, direction]
         });
       }
       function moveY(target, direction) {
-        tl.to(target, {
-          y: randomY(direction),
-          ease: "Sine.easeInOut",
+        gsap.to(target, {
+          y: randomY(),
+          ease: "power3.easeInOut",
           duration: randomTime(),
+          modifiers: (x, y) => {
+            wrapY(parseFloat(y)) + "px";
+            wrapX(parseFloat(x)) + "px";
+          },
           onComplete: moveY,
+          onCompleteParams: [target, direction]
+        });
+      }
+      function rotate(target, direction) {
+        gsap.to(target, {
+          rotation: randomAngle(direction),
+          ease: "Sine.easeInOut",
+          duration: randomTime2(),
+          onComplete: rotate,
           onCompleteParams: [target, direction * -1]
         });
       }
@@ -91,9 +102,8 @@ export default {
 
       // init
       gsap.set(".sphere", {
-        x: randomX(-1),
-        y: randomX(1),
-        rotation: randomAngle(-1)
+        x: 500,
+        y: 500
       });
       moveX(".sphere", 1);
       moveY(".sphere", -1);
@@ -101,8 +111,8 @@ export default {
     }
   },
   mounted() {
-    let x = gsap.utils.random(50, 70) + "vw";
-    gsap.to(".sphere", { left: x, bottom: "50vh" });
+    // let x = gsap.utils.random(50, 70) + "vw";
+    // gsap.to(".sphere", { left: x, bottom: "50vh" });
     this.animateSphere();
   }
 };
@@ -116,8 +126,8 @@ export default {
 }
 .wrapper {
   position: relative;
-  height: calc(100vh - 40px);
-  bottom: 40px;
+  height: calc(100vh - 80px);
+  /* bottom: 40px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,17 +135,27 @@ export default {
 }
 .item {
   text-align: center;
-  flex-shrink: auto;
+  /* flex-shrink: auto; */
 }
 .contact-title {
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  line-height: 1.2;
+  margin-bottom: -0.2em; /* reduce white-space below of 20% font-size */
+}
+@supports (-moz-appearance: none) {
+  .contact-title {
+    line-height: 1;
+  }
+}
+@-moz-document url-prefix() {
+  .contact-title {
+    line-height: 1;
+  }
 }
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {
   .contact-title {
-    font-size: 50vh;
+    font-size: 45vh;
   }
 }
 /* tall screens */
@@ -145,7 +165,7 @@ export default {
   }
 }
 .subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.2;
 }
 .infos {
@@ -169,5 +189,12 @@ export default {
 }
 span {
   line-height: 0.9;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  text-decoration: underline;
 }
 </style>

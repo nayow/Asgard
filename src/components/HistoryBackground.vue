@@ -93,8 +93,7 @@ export default {
 img {
   z-index: 9;
   height: 80vh;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin: 0 10vw;
 }
 .left {
   transform: rotate(150deg);

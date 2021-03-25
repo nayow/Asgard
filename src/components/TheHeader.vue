@@ -39,9 +39,19 @@ export default {
   color: black;
   z-index: 9;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   width: 100%;
+}
+@supports (-moz-appearance: none) {
+  #nav {
+    align-items: center;
+  }
+}
+@-moz-document url-prefix() {
+  #nav {
+    align-items: center;
+  }
 }
 .item {
   padding: 0.5rem;

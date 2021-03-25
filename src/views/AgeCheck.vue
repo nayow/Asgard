@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="item title">
+    <div class="item title mb-3">
       <span>CE SITE EST RÉSERVÉ</span>
       <br />
       <span>AUX PERSONNES MAJEURES.</span>
@@ -58,11 +58,28 @@ export default {
 .title {
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  line-height: 0.9em;
+  line-height: 0.5;
   flex-grow: 0.2;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+/* Different line-height for FF */
+@supports (-moz-appearance: none) {
+  .title {
+    line-height: 0.9;
+  }
+  .text {
+    line-height: 1.3;
+  }
+}
+@-moz-document url-prefix() {
+  .title {
+    line-height: 0.9;
+  }
+  .text {
+    line-height: 1.3;
+  }
 }
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {
@@ -104,11 +121,9 @@ export default {
   cursor: pointer;
   font-size: 1rem;
   position: relative;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
   width: 200px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10px;
   color: #fff;
   text-align: center;
   transition-duration: 0.4s;
@@ -125,10 +140,8 @@ export default {
   content: "";
   display: block;
   position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
-  margin-left: -20px !important;
-  margin-top: -120%;
+  padding: 300% 0 0 350%;
+  margin: -120% 0 0 -20px !important;
   opacity: 0;
   transition: all 0.8s;
 }

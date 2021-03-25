@@ -49,7 +49,6 @@ export default {
 .item {
   text-align: center;
   padding: 0.5rem;
-  line-height: 1.3;
 }
 
 .text {

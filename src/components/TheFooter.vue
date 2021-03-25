@@ -77,10 +77,7 @@ export default {
   background-color: whitesmoke;
   color: black;
   z-index: 8;
-
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  user-select: none; /* requires prefix */
 }
 
 .flex-container {
@@ -89,12 +86,22 @@ export default {
   display: flex;
   padding: 0.5rem;
   justify-content: flex-start;
-  align-items: center;
+  align-items: baseline;
   z-index: 9;
+}
+@supports (-moz-appearance: none) {
+  .flex-container {
+    align-items: center;
+  }
+}
+@-moz-document url-prefix() {
+  .flex-container {
+    align-items: center;
+  }
 }
 
 .sliding-box {
-  padding: 30px;
-  text-align: center;
+  /* padding: 10px; */
+  /* text-align: center; */
 }
 </style>

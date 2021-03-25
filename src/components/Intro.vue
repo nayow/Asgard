@@ -48,12 +48,6 @@ gsap.registerPlugin(Draggable);
 export default {
   name: "Intro",
   methods: {
-    // initSlide() {
-    //   setTimeout(() => {
-    //     const textWidth = document.querySelector(".title").getBBox().width;
-    //     this.triggerSlide(textWidth);
-    //   }, 0);
-    // },
     triggerSlide() {
       const CSSfontSize = 110;
       let textWidth = CSSfontSize * 18; // 13.8 is font-size to width ratio so we take more to have space
@@ -70,14 +64,6 @@ export default {
           x: x => windowWrap(parseFloat(x)) + "px"
         }
       });
-
-      // const viewportWidth = document.body.clientWidth;
-      // gsap.to(".slide__text", {
-      //   duration: 20,
-      //   ease: "none",
-      //   x: "-=" + (textWidth + viewportWidth),
-      //   repeat: -1
-      // });
     },
     initMask() {
       Draggable.create("#circle-shadow", {
@@ -110,9 +96,7 @@ export default {
   font-size: 110vh;
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  user-select: none; /* requires prefix */
 }
 
 svg {
@@ -126,5 +110,9 @@ svg {
 
 #background-statue {
   height: 100vh;
+}
+
+#circle-shadow {
+  cursor: url(../assets/picto.png) 16 16, move !important;
 }
 </style>
