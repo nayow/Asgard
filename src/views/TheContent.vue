@@ -17,7 +17,6 @@
 
 <script>
 import fullpage from "fullpage.js";
-import easings from "fullpage.js/vendors/easings.js";
 import Intro from "@/components/Intro.vue";
 import History from "@/components/History.vue";
 import Drink from "@/components/Drink.vue";
@@ -31,6 +30,7 @@ export default {
     Drink,
     Contact
   },
+  props: ["navClicked"],
   mounted() {
     new fullpage("#fullpage", {
       licenseKey: "abc",
@@ -39,7 +39,20 @@ export default {
       scrollingSpeed: 1200,
       menu: "#nav",
       afterLoad: (orig, desti, dir) => {
-        if (desti.anchor == "boisson" && dir == "down") {
+        // from navbar click
+        if (
+          this.$props.navClicked == true &&
+          this.$refs.drink.scrollStep !== 3
+        ) {
+          this.$refs.drink.startAnimations();
+          this.$root.navClicked = false; // reset data
+        }
+        // from scroll
+        if (
+          desti.anchor == "boisson" &&
+          dir == "down" &&
+          this.$refs.drink.scrollStep !== 3
+        ) {
           window.fullpage_api.setAllowScrolling(false, "down");
           window.fullpage_api.setKeyboardScrolling(false, "down");
           this.$refs.drink.initScrollAnim();

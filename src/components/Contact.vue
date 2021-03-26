@@ -140,7 +140,7 @@ export default {
 .contact-title {
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  margin-bottom: -0.2em; /* reduce white-space below of 20% font-size */
+  margin-bottom: -0.1em; /* reduce white-space below of 20% font-size */
 }
 @supports (-moz-appearance: none) {
   .contact-title {

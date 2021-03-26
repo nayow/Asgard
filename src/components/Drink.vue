@@ -59,129 +59,145 @@ export default {
       let computedFontSize = window.getComputedStyle(drinkNameEl).fontSize;
       this.letterHeight = parseFloat(computedFontSize) * 0.69; // the font has a letter height / font size ratio of approx 0.69
     },
+    bringBottle(callback) {
+      let gl = gsap.timeline({ onComplete: callback });
+      gl.from(".bottle", {
+        y: "-=200",
+        autoAlpha: 0,
+        ease: "back",
+        duration: 3
+      });
+      gl.to(".bottle", { rotation: 410, ease: "none" }, "<");
+      this.scrollStep = 1;
+    },
+    bringLeft(callback) {
+      gsap.from(".box-left", {
+        y: "+=500",
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power3.out",
+        onComplete: callback
+      });
+      this.scrollStep = 2;
+    },
+    bringRight(callback) {
+      gsap.from(".box-right", {
+        y: "+=500",
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power3.out",
+        onComplete: callback
+      });
+      this.scrollStep = 3;
+    },
+    allowScrollDown() {
+      setTimeout(function() {
+        window.fullpage_api.setAllowScrolling(true, "down");
+        window.fullpage_api.setKeyboardScrolling(true, "down");
+      }, 600);
+    },
+    animateBottle() {
+      // vars
+      const randomX = random(0, 10);
+      const randomY = random(5, 10);
+      const randomAngle = random(-4, 4);
+
+      // functions
+      function moveX(target, direction) {
+        gsap.to(target, {
+          x: "+=" + randomX(direction),
+          ease: "Sine.easeInOut",
+          duration: 3,
+          onComplete: moveX,
+          onCompleteParams: [target, direction * -1]
+        });
+      }
+      function moveY(target, direction) {
+        gsap.to(target, {
+          y: "+=" + randomY(direction),
+          ease: "Sine.easeInOut",
+          duration: 2,
+          onComplete: moveY,
+          onCompleteParams: [target, direction * -1]
+        });
+      }
+      function rotate(target, direction) {
+        gsap.to(target, {
+          rotation: "+=" + randomAngle(direction),
+          ease: "Sine.easeInOut",
+          duration: 3,
+          onComplete: rotate,
+          onCompleteParams: [target, direction * -1]
+        });
+      }
+      function random(min, max) {
+        const delta = max - min;
+        return (direction = 1) => (min + delta * Math.random()) * direction;
+      }
+
+      // init
+      moveX(".bottle", 1);
+      moveY(".bottle", -1);
+      rotate(".bottle", 1);
+    },
     initScrollAnim() {
       let that = this;
       let container = document.getElementById("gsap-container");
-
-      function animateBottle() {
-        // vars
-        const randomX = random(0, 10);
-        const randomY = random(5, 10);
-        const randomAngle = random(-4, 4);
-
-        // functions
-        function moveX(target, direction) {
-          gsap.to(target, {
-            x: "+=" + randomX(direction),
-            ease: "Sine.easeInOut",
-            duration: 3,
-            onComplete: moveX,
-            onCompleteParams: [target, direction * -1]
-          });
-        }
-        function moveY(target, direction) {
-          gsap.to(target, {
-            y: "+=" + randomY(direction),
-            ease: "Sine.easeInOut",
-            duration: 2,
-            onComplete: moveY,
-            onCompleteParams: [target, direction * -1]
-          });
-        }
-        function rotate(target, direction) {
-          gsap.to(target, {
-            rotation: "+=" + randomAngle(direction),
-            ease: "Sine.easeInOut",
-            duration: 3,
-            onComplete: rotate,
-            onCompleteParams: [target, direction * -1]
-          });
-        }
-        function random(min, max) {
-          const delta = max - min;
-          return (direction = 1) => (min + delta * Math.random()) * direction;
-        }
-
-        // init
-        moveX(".bottle", 1);
-        moveY(".bottle", -1);
-        rotate(".bottle", 1);
-      }
 
       function displayBottle() {
         container.addEventListener(
           "wheel",
           function(e) {
             if (e.deltaY > 0) {
-              let gl = gsap.timeline({ onComplete: displayLeft });
-              gl.from(".bottle", {
-                y: "-=200",
-                autoAlpha: 0,
-                ease: "back",
-                duration: 3
-              });
-              gl.to(".bottle", { rotation: 410, ease: "none" }, "<");
+              that.bringBottle(displayLeft);
             }
           },
           { once: true, passive: true }
         );
       }
-
       function displayLeft() {
-        that.$data.scrollStep = 1;
-        animateBottle();
+        that.animateBottle();
         container.addEventListener(
           "wheel",
           function(e) {
             if (e.deltaY > 0) {
-              gsap.from(".box-left", {
-                y: "+=500",
-                autoAlpha: 0,
-                duration: 1,
-                ease: "power3.out",
-                onComplete: displayRight
-              });
+              that.bringLeft(displayRight);
             }
           },
           { once: true, passive: true }
         );
       }
-
       function displayRight() {
-        that.$data.scrollStep = 2;
         container.addEventListener(
           "wheel",
           function(e) {
             if (e.deltaY > 0) {
-              gsap.from(".box-right", {
-                y: "+=500",
-                autoAlpha: 0,
-                duration: 1,
-                ease: "power3.out",
-                onComplete: allowScrollDown
-              });
+              that.bringRight(that.allowScrollDown);
             }
           },
           { once: true, passive: true }
         );
-      }
-
-      function allowScrollDown() {
-        setTimeout(function() {
-          window.fullpage_api.setAllowScrolling(true, "down");
-          window.fullpage_api.setKeyboardScrolling(true, "down");
-        }, 600);
       }
 
       // if user scrolls back up too early it will retrieve its latest position
-      switch (that.$data.scrollStep) {
-        case 0:
-          return displayBottle();
-        case 1:
-          return displayLeft();
-        case 2:
-          return displayRight();
+      if (this.scrollStep == 0) return displayBottle();
+      if (this.scrollStep == 1) return displayLeft();
+      if (this.scrollStep == 2) return displayRight();
+    },
+    startAnimations() {
+      if (this.scrollStep == 0) {
+        this.bringBottle();
+        this.bringLeft();
+        this.bringRight();
       }
+      if (this.scrollStep == 1) {
+        this.bringLeft();
+        this.bringRight();
+      }
+      if (this.scrollStep == 2) {
+        this.bringRight();
+      }
+      this.allowScrollDown();
     }
   },
   mounted() {

@@ -133,8 +133,8 @@ export default {
   border-width: 3px;
 }
 .button:hover {
-  background: #fff;
   color: #000;
+  border-color: #ffffffc2;
 }
 .button:after {
   content: "";
@@ -165,9 +165,11 @@ export default {
   border-color: #009eff;
 }
 .button1:hover {
+  background-color: #ffee00;
   box-shadow: 0px 2px 10px 5px #d4ca3b;
 }
 .button2:hover {
+  background-color: #009eff;
   box-shadow: 0px 2px 10px 5px #4cbadb;
 }
 .button1:after {

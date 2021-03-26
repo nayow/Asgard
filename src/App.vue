@@ -1,8 +1,6 @@
 <template>
-  <TheHeader />
-  <div class="container-fluid">
-    <router-view />
-  </div>
+  <TheHeader @onNavClicked="setNavClicked" />
+  <router-view :navClicked="navClicked" />
   <TheFooter />
 </template>
 
@@ -15,6 +13,16 @@ export default {
   components: {
     TheHeader,
     TheFooter
+  },
+  data() {
+    return {
+      navClicked: false
+    };
+  },
+  methods: {
+    setNavClicked() {
+      this.navClicked = true;
+    }
   }
 };
 </script>

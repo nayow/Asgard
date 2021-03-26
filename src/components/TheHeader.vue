@@ -5,7 +5,10 @@
     </div>
     <div v-show="!ageCheckPage" class="item">
       <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
-      <a href="#boisson" data-menuanchor="boisson">BOISSON</a> —
+      <a href="#boisson" data-menuanchor="boisson" @click="onNavClick"
+        >BOISSON</a
+      >
+      —
       <a href="#contact" data-menuanchor="contact">CONTACT</a>
     </div>
   </div>
@@ -18,6 +21,12 @@ export default {
     return {
       ageCheckPage: true
     };
+  },
+  methods: {
+    // if drink page is accessed from clicking the menu then we want instant animations (no scroll events)
+    onNavClick() {
+      this.$emit("onNavClicked", true);
+    }
   },
   watch: {
     $route(to, from) {
