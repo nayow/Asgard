@@ -1,7 +1,10 @@
 <template>
   <div id="nav">
     <div class="item">
-      <a href="#home">ASGARD IS A NEW WORLD</a>
+      <a href="#home"
+        ><span class="d-none d-sm-inline">ASGARD </span
+        ><span class="d-none d-md-inline">IS A NEW WORLD</span></a
+      >
     </div>
     <div v-show="!ageCheckPage" class="item">
       <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
@@ -51,6 +54,7 @@ export default {
   align-items: baseline;
   justify-content: space-between;
   width: 100%;
+  padding: 0 0.5rem;
 }
 @supports (-moz-appearance: none) {
   #nav {
@@ -63,7 +67,7 @@ export default {
   }
 }
 .item {
-  padding: 0.5rem;
+  white-space: nowrap;
 }
 
 #nav a {

@@ -25,6 +25,7 @@ export default {
       let box = document.createElement("div");
       box.classList.add("sliding-box");
       box.style.position = "absolute";
+      box.style.whiteSpace = "nowrap";
       box.innerHTML = "THE NEW POWER OF ENERGY DRINK";
       container.appendChild(box);
     });
@@ -101,7 +102,6 @@ export default {
 }
 
 .sliding-box {
-  /* padding: 10px; */
-  /* text-align: center; */
+  /* white-space:nowrap; */
 }
 </style>

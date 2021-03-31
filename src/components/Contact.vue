@@ -5,25 +5,25 @@
     <div class="item contact-title">
       CONTACT
     </div>
-    <div class="item subtitle col-8">
+    <div class="item subtitle col-10 col-sm-8">
       COLLABORATIONS, DISTRIBUTION, QUESTIONS, NOUS VOUS REPONDRONS
     </div>
     <div class="row infos">
-      <div class="col col-md-4 col-sm-4 pb-3">
+      <div class="col col-sm-4 pb-3">
         <span class="info-title glow--blue">TEL</span>
         <br />
         <span class="info-content"
           ><a href="tel:0650876003">0650876003</a></span
         >
       </div>
-      <div class="col col-md-4 col-sm-4 pb-3">
+      <div class="col col-sm-4 pb-3">
         <span class="info-title glow--yellow">MAIL</span>
         <br />
         <span class="info-content"
           ><a href="mailto:hello@asgard.cool">HELLO@ASGARD.COOL</a></span
         >
       </div>
-      <div class="col col-md-4 col-sm-8">
+      <div class="col col-sm-4">
         <span class="info-title glow--red">RESEAUX SOCIAUX</span>
         <br />
         <span class="info-content"
@@ -32,7 +32,9 @@
       </div>
     </div>
     <div class="item bottom-line">
-      Conditions générales de vente / Mentions légales / Utilisation des cookies
+      <div class="d-inline-block">Conditions générales de vente /&nbsp;</div>
+      <div class="d-inline-block">Mentions légales /&nbsp;</div>
+      <div class="d-inline-block">Utilisation des cookies</div>
     </div>
   </div>
 </template>
@@ -126,8 +128,8 @@ export default {
 }
 .wrapper {
   position: relative;
-  height: calc(100vh - 80px);
-  /* bottom: 40px; */
+  height: calc(100vh - 80px - 40px);
+  top: 40px; /** sticking it to the bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,7 +142,7 @@ export default {
 .contact-title {
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  margin-bottom: -0.1em; /* reduce white-space below of 20% font-size */
+  margin-bottom: -0.1rem; /* reduce white-space below of 20% font-size */
 }
 @supports (-moz-appearance: none) {
   .contact-title {
@@ -178,10 +180,10 @@ export default {
   font-size: 2rem;
 }
 .info-title {
-  font-size: 0.8em;
+  font-size: 0.7em;
 }
 .bottom-line {
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   color: #707070;
 }
 .col {
@@ -189,6 +191,7 @@ export default {
 }
 span {
   line-height: 0.9;
+  white-space: nowrap;
 }
 a {
   text-decoration: none;
@@ -196,5 +199,27 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+
+/* md breakpoint */
+@media (max-width: 768px) {
+  .info-content {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+}
+
+/* sm breakpoint */
+@media (max-width: 576px) {
+  .info-content {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
 }
 </style>
