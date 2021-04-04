@@ -5,7 +5,7 @@
     <div class="item contact-title">
       CONTACT
     </div>
-    <div class="item subtitle col-10 col-sm-8">
+    <div class="item subtitle col-10 col-sm-8 d-none d-sm-block">
       COLLABORATIONS, DISTRIBUTION, QUESTIONS, NOUS VOUS REPONDRONS
     </div>
     <div class="row infos">
@@ -31,11 +31,11 @@
         >
       </div>
     </div>
-    <div class="item bottom-line">
-      <div class="d-inline-block">Conditions générales de vente /&nbsp;</div>
-      <div class="d-inline-block">Mentions légales /&nbsp;</div>
-      <div class="d-inline-block">Utilisation des cookies</div>
-    </div>
+  </div>
+  <div class="item bottom-line">
+    <div class="d-inline-block">Conditions générales de vente /&nbsp;</div>
+    <div class="d-inline-block">Mentions légales /&nbsp;</div>
+    <div class="d-inline-block">Utilisation des cookies</div>
   </div>
 </template>
 
@@ -128,8 +128,8 @@ export default {
 }
 .wrapper {
   position: relative;
-  height: calc(100vh - 80px - 40px);
-  top: 40px; /** sticking it to the bottom */
+  height: calc(100vh - 100px);
+  top: 20px; /** sticking it to the bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
