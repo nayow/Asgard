@@ -90,13 +90,8 @@ export default {
     //   this.scrollStep = 3;
     // },
     initAnimsTimeline() {
-      let tl = gsap
-        .timeline({
-          onComplete: () => {
-            this.scrollComplete = true;
-          }
-        })
-        .pause();
+      const that = this;
+      let tl = gsap.timeline().pause();
       gsap.set(".bottle", { rotation: "65deg" });
       tl.from(".bottle", {
         y: "-=200",
@@ -121,7 +116,11 @@ export default {
           y: "+=500",
           autoAlpha: 0,
           duration: 1,
-          ease: "power3.out"
+          ease: "power3.out",
+          onComplete: () => {
+            that.scrollComplete = true;
+            console.log(that.scrollComplete);
+          }
         },
         2
       );
@@ -234,6 +233,7 @@ export default {
     // by clicking in the menu animations must directly fire
     startAnimations() {
       this.onScrollAnims.play();
+      this.scrollComplete = true;
       this.allowScrollDown();
     }
   },
