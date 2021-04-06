@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" id="cc">
+  <div class="wrapper">
     <div class="asgard-container">
       <div class="asgard asgard-left">
         ASGARD
@@ -87,8 +87,8 @@ export default {
       });
       let windowWrap = gsap.utils.wrap(textWidth * -1, textWidth);
       // save this animation to access it globally
-      this.gsapAnims.push(
-        gsap.to(".asgard", {
+      this.gsapAnims[0] = gsap
+        .to(".asgard", {
           x: "-=10000px",
           ease: "none",
           repeat: -1,
@@ -121,7 +121,6 @@ export default {
 .wrapper {
   position: relative;
   height: calc(100vh - 80px);
-  margin-top: 40px;
 }
 
 .asgard {

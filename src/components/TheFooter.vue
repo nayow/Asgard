@@ -58,7 +58,6 @@ export default {
   height: 40px;
   background-color: whitesmoke;
   color: black;
-  z-index: 8;
   user-select: none; /* requires prefix */
 }
 
@@ -69,7 +68,6 @@ export default {
   padding: 0.5rem;
   justify-content: flex-start;
   align-items: center;
-  z-index: 9;
 }
 /* @supports (-moz-appearance: none) {
   .flex-container {

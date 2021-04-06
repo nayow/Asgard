@@ -49,7 +49,6 @@ export default {
   height: 40px;
   background-color: whitesmoke;
   color: black;
-  z-index: 9;
   display: flex;
   align-items: center;
   justify-content: space-between;

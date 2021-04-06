@@ -41,6 +41,8 @@ export default {
       scrollingSpeed: 1200,
       menu: "#nav",
       fixedElements: "#nav, #footer",
+      paddingTop: "40px",
+      paddingBottom: "40px",
       onLeave: (orig, desti, dir) => {
         (function playVisibleAnims() {
           that.$refs[desti.anchor].gsapAnims.forEach(anim => {

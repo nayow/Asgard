@@ -66,13 +66,4 @@ export default {
 .subtext {
   font-size: 0.8rem;
 }
-
-/* .row:last-of-type {
-  position: absolute;
-  bottom: 3vh;
-}
-
-p:last-of-type {
-  font-size: 0.7em;
-} */
 </style>

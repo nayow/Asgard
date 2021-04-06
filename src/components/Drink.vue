@@ -92,7 +92,7 @@ export default {
     initAnimsTimeline() {
       const that = this;
       let tl = gsap.timeline().pause();
-      gsap.set(".bottle", { rotation: "65deg" });
+      gsap.set(".bottle", { rotation: "60deg" });
       tl.from(".bottle", {
         y: "-=200",
         autoAlpha: 0,
