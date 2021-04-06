@@ -233,7 +233,6 @@ export default {
     // by clicking in the menu animations must directly fire
     startAnimations() {
       this.onScrollAnims.play();
-      this.scrollComplete = true;
       this.allowScrollDown();
     }
   },
