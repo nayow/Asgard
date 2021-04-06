@@ -24,7 +24,6 @@ div {
   margin-bottom: 1rem;
 }
 span {
-  font-family: Helvetica, sans-serif;
   letter-spacing: unset;
 }
 hr {

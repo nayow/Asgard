@@ -51,12 +51,12 @@ export default {
   color: black;
   z-index: 9;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 0 0.5rem;
 }
-@supports (-moz-appearance: none) {
+/* @supports (-moz-appearance: none) {
   #nav {
     align-items: center;
   }
@@ -65,7 +65,7 @@ export default {
   #nav {
     align-items: center;
   }
-}
+} */
 .item {
   white-space: nowrap;
 }

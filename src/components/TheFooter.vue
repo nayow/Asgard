@@ -11,7 +11,8 @@ export default {
   data() {
     return {
       viewportMaxWidth: window.screen.width,
-      elementWidth: 360
+      elementWidth: 360,
+      gsapAnims: []
     };
   },
   mounted() {
@@ -46,27 +47,7 @@ export default {
         x: x => windowWrap(parseFloat(x)) + "px"
       }
     });
-
-    // gsap.set(".sliding-box", { paddingLeft: "10px", paddingRight: "10px" });
-    // gsap.to(".sliding-box", {
-    //   x: "-=500px",
-    //   ease: none,
-    //   repeat: -1,
-    //   modifiers: {
-    //     x: gsap.utils.unitize()
-    //   }
-    // });
   }
-  // mounted() {
-  //   const totalWidth = this.viewportMaxWidth + this.elementWidth;
-  //   console.log(document.getElementsByClassName("sliding-box"));
-  //   gsap.to(".sliding-box", {
-  //     x: "-=" + totalWidth,
-  //     duration: 100,
-  //     ease: "none",
-  //     repeat: -1
-  //   });
-  // }
 };
 </script>
 
@@ -87,10 +68,10 @@ export default {
   display: flex;
   padding: 0.5rem;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: center;
   z-index: 9;
 }
-@supports (-moz-appearance: none) {
+/* @supports (-moz-appearance: none) {
   .flex-container {
     align-items: center;
   }
@@ -99,9 +80,5 @@ export default {
   .flex-container {
     align-items: center;
   }
-}
-
-.sliding-box {
-  /* white-space:nowrap; */
-}
+} */
 </style>

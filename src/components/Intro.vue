@@ -23,10 +23,35 @@
             style="fill: #000"
           />
         </clipPath>
+        <linearGradient
+          id="gradient"
+          x1=".5"
+          x2=".5"
+          y2="1"
+          gradientTransform="rotate(-10)"
+        >
+          <stop stop-color="#effbff" />
+          <stop stop-color="#effbff" />
+          <stop offset=".1" stop-color="#00c9ff" />
+          <stop offset=".16" stop-color="#00c9ff" />
+          <stop offset=".28" stop-color="#f00" stop-opacity=".8" />
+          <stop offset=".34" stop-color="#ff59c2" />
+          <stop offset=".53" stop-color="#00c9ff" />
+          <stop offset=".58" stop-color="#fff" />
+          <stop offset=".65" stop-color="#fbff00" />
+          <stop offset=".75" stop-color="#00c9ff" />
+          <stop offset=".91" stop-color="#ff2d9b" />
+          <stop offset="1" stop-color="#f00" stop-opacity=".8" />
+          <stop offset="1" stop-color="#ff0808" />
+        </linearGradient>
       </defs>
       <g clip-path="url(#mask)">
         <rect width="100%" height="100%" fill="#000" />
-        <image id="background-statue" xlink:href="@/assets/statue.png" />
+        <image
+          x="25%"
+          id="background-statue"
+          xlink:href="@/assets/statue.png"
+        />
       </g>
       <ellipse
         id="circle-shadow"
@@ -34,7 +59,8 @@
         cy="50%"
         rx="120"
         ry="200"
-        style="stroke: #fff; fill: transparent; stroke-width: 5;"
+        stroke="url(#gradient)"
+        style="fill: transparent; stroke-width: 5;"
       />
     </svg>
   </div>
@@ -47,23 +73,31 @@ gsap.registerPlugin(Draggable);
 
 export default {
   name: "Intro",
+  data() {
+    return {
+      gsapAnims: []
+    };
+  },
   methods: {
     triggerSlide() {
       const CSSfontSize = 110;
-      let textWidth = CSSfontSize * 18; // 13.8 is font-size to width ratio so we take more to have space
+      let textWidth = CSSfontSize * 22; // 13.8 is font-size to width ratio so we take more to have space
       gsap.set(".asgard", {
         x: i => (i - 1) * textWidth
       });
       let windowWrap = gsap.utils.wrap(textWidth * -1, textWidth);
-      gsap.to(".asgard", {
-        x: "-=10000px",
-        ease: "none",
-        repeat: -1,
-        duration: 40,
-        modifiers: {
-          x: x => windowWrap(parseFloat(x)) + "px"
-        }
-      });
+      // save this animation to access it globally
+      this.gsapAnims.push(
+        gsap.to(".asgard", {
+          x: "-=10000px",
+          ease: "none",
+          repeat: -1,
+          duration: 40,
+          modifiers: {
+            x: x => windowWrap(parseFloat(x)) + "px"
+          }
+        })
+      );
     },
     initMask() {
       Draggable.create("#circle-shadow", {

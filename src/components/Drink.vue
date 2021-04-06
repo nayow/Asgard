@@ -4,6 +4,7 @@
     <base-title color="red">LA BOISSON</base-title>
     <div id="flex-container" class="d-flex">
       <div class="box-left">
+        <span>HILDR</span>
         <drink-description-big
           text-content="COCKTAIL ENERGISANT"
         ></drink-description-big>
@@ -49,46 +50,82 @@ export default {
   },
   data() {
     return {
-      letterHeight: 0, // init
-      scrollStep: 0 // increments with each animation
+      scrollComplete: false,
+      gsapAnims: [],
+      onScrollAnims: ""
     };
   },
   methods: {
-    getLetterHeight() {
-      let drinkNameEl = document.getElementById("text-content");
-      let computedFontSize = window.getComputedStyle(drinkNameEl).fontSize;
-      this.letterHeight = parseFloat(computedFontSize) * 0.69; // the font has a letter height / font size ratio of approx 0.69
-    },
-    bringBottle(callback) {
-      let gl = gsap.timeline({ onComplete: callback });
-      gl.from(".bottle", {
+    // bringBottle(callback) {
+    //   gsap.from(".bottle", {
+    //     y: "-=200",
+    //     autoAlpha: 0,
+    //     ease: "back",
+    //     duration: 3,
+    //     onComplete: () => {
+    //       callback;
+    //       this.animateBottle();
+    //     }
+    //   });
+    //   this.scrollStep = 1;
+    // },
+    // bringLeft(callback) {
+    //   gsap.from(".box-left", {
+    //     y: "+=500",
+    //     autoAlpha: 0,
+    //     duration: 1,
+    //     ease: "power3.out",
+    //     onComplete: callback
+    //   });
+    //   this.scrollStep = 2;
+    // },
+    // bringRight(callback) {
+    //   gsap.from(".box-right", {
+    //     y: "+=500",
+    //     autoAlpha: 0,
+    //     duration: 1,
+    //     ease: "power3.out",
+    //     onComplete: callback
+    //   });
+    //   this.scrollStep = 3;
+    // },
+    initAnimsTimeline() {
+      let tl = gsap
+        .timeline({
+          onComplete: () => {
+            this.scrollComplete = true;
+          }
+        })
+        .pause();
+      gsap.set(".bottle", { rotation: "65deg" });
+      tl.from(".bottle", {
         y: "-=200",
         autoAlpha: 0,
         ease: "back",
-        duration: 3
+        duration: 3,
+        onComplete: () => this.animateBottle()
       });
-      gl.to(".bottle", { rotation: 410, ease: "none" }, "<");
-      this.scrollStep = 1;
-    },
-    bringLeft(callback) {
-      gsap.from(".box-left", {
-        y: "+=500",
-        autoAlpha: 0,
-        duration: 1,
-        ease: "power3.out",
-        onComplete: callback
-      });
-      this.scrollStep = 2;
-    },
-    bringRight(callback) {
-      gsap.from(".box-right", {
-        y: "+=500",
-        autoAlpha: 0,
-        duration: 1,
-        ease: "power3.out",
-        onComplete: callback
-      });
-      this.scrollStep = 3;
+      tl.from(
+        ".box-left",
+        {
+          y: "+=500",
+          autoAlpha: 0,
+          duration: 1,
+          ease: "power3.out"
+        },
+        1
+      );
+      tl.from(
+        ".box-right",
+        {
+          y: "+=500",
+          autoAlpha: 0,
+          duration: 1,
+          ease: "power3.out"
+        },
+        2
+      );
+      return tl;
     },
     allowScrollDown() {
       setTimeout(function() {
@@ -98,13 +135,14 @@ export default {
     },
     animateBottle() {
       // vars
+      const that = this;
       const randomX = random(0, 10);
       const randomY = random(5, 10);
       const randomAngle = random(-4, 4);
 
       // functions
       function moveX(target, direction) {
-        gsap.to(target, {
+        that.gsapAnims[0] = gsap.to(target, {
           x: "+=" + randomX(direction),
           ease: "Sine.easeInOut",
           duration: 3,
@@ -113,7 +151,7 @@ export default {
         });
       }
       function moveY(target, direction) {
-        gsap.to(target, {
+        that.gsapAnims[1] = gsap.to(target, {
           y: "+=" + randomY(direction),
           ease: "Sine.easeInOut",
           duration: 2,
@@ -122,7 +160,7 @@ export default {
         });
       }
       function rotate(target, direction) {
-        gsap.to(target, {
+        that.gsapAnims[2] = gsap.to(target, {
           rotation: "+=" + randomAngle(direction),
           ease: "Sine.easeInOut",
           duration: 3,
@@ -135,81 +173,72 @@ export default {
         return (direction = 1) => (min + delta * Math.random()) * direction;
       }
 
-      // init
+      // init and gsap anims for this component
       moveX(".bottle", 1);
       moveY(".bottle", -1);
       rotate(".bottle", 1);
     },
     initScrollAnim() {
-      let that = this;
-      let container = document.getElementById("gsap-container");
+      const that = this;
+      const container = document.getElementById("gsap-container");
 
-      function displayBottle() {
-        container.addEventListener(
-          "wheel",
-          function(e) {
-            if (e.deltaY > 0) {
-              that.bringBottle(displayLeft);
-            }
-          },
-          { once: true, passive: true }
-        );
-      }
-      function displayLeft() {
-        that.animateBottle();
-        container.addEventListener(
-          "wheel",
-          function(e) {
-            if (e.deltaY > 0) {
-              that.bringLeft(displayRight);
-            }
-          },
-          { once: true, passive: true }
-        );
-      }
-      function displayRight() {
-        container.addEventListener(
-          "wheel",
-          function(e) {
-            if (e.deltaY > 0) {
-              that.bringRight(that.allowScrollDown);
-            }
-          },
-          { once: true, passive: true }
-        );
-      }
+      container.addEventListener(
+        "wheel",
+        function(e) {
+          if (e.deltaY > 0) {
+            that.onScrollAnims.play();
+          }
+        },
+        { once: true, passive: true }
+      );
+
+      // function displayBottle() {
+      //   container.addEventListener(
+      //     "wheel",
+      //     function(e) {
+      //       if (e.deltaY > 0) {
+      //         that.bringBottle(displayLeft);
+      //       }
+      //     },
+      //     { once: true, passive: true }
+      //   );
+      // }
+      // function displayLeft() {
+      //   container.addEventListener(
+      //     "wheel",
+      //     function(e) {
+      //       if (e.deltaY > 0) {
+      //         that.bringLeft(displayRight);
+      //       }
+      //     },
+      //     { once: true, passive: true }
+      //   );
+      // }
+      // function displayRight() {
+      //   container.addEventListener(
+      //     "wheel",
+      //     function(e) {
+      //       if (e.deltaY > 0) {
+      //         that.bringRight(that.allowScrollDown);
+      //       }
+      //     },
+      //     { once: true, passive: true }
+      //   );
+      // }
 
       // if user scrolls back up too early it will retrieve its latest position
-      if (this.scrollStep == 0) return displayBottle();
-      if (this.scrollStep == 1) return displayLeft();
-      if (this.scrollStep == 2) return displayRight();
+      // if (this.scrollStep == 0) return displayBottle();
+      // if (this.scrollStep == 1) return displayLeft();
+      // if (this.scrollStep == 2) return displayRight();
     },
+    // by clicking in the menu animations must directly fire
     startAnimations() {
-      if (this.scrollStep == 0) {
-        this.bringBottle();
-        this.bringLeft();
-        this.bringRight();
-      }
-      if (this.scrollStep == 1) {
-        this.bringLeft();
-        this.bringRight();
-      }
-      if (this.scrollStep == 2) {
-        this.bringRight();
-      }
+      this.onScrollAnims.play();
       this.allowScrollDown();
     }
   },
   mounted() {
-    //init
-    this.getLetterHeight();
-
-    // listen to changes
-    this.$nextTick(function() {
-      window.addEventListener("resize", _ => {
-        this.getLetterHeight();
-      });
-    });
+    this.onScrollAnims = this.initAnimsTimeline();
   }
 };
 </script>

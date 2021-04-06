@@ -1,16 +1,16 @@
 <template>
   <div id="fullpage">
     <div class="section">
-      <Intro />
+      <intro ref="home"></intro>
     </div>
     <div class="section">
-      <History />
+      <history ref="histoire"></history>
     </div>
     <div class="section">
-      <drink ref="drink"></drink>
+      <drink ref="boisson"></drink>
     </div>
     <div class="section">
-      <Contact />
+      <contact ref="contact"></contact>
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@ import Intro from "@/components/Intro.vue";
 import History from "@/components/History.vue";
 import Drink from "@/components/Drink.vue";
 import Contact from "@/components/Contact.vue";
+import { gsap } from "gsap";
 
 export default {
   name: "TheContent",
@@ -32,30 +33,50 @@ export default {
   },
   props: ["navClicked"],
   mounted() {
+    const that = this;
     new fullpage("#fullpage", {
       licenseKey: "abc",
       anchors: ["home", "histoire", "boisson", "contact"],
       responsiveWidth: 600,
       scrollingSpeed: 1200,
       menu: "#nav",
+      onLeave: (orig, desti, dir) => {
+        (function playVisibleAnims() {
+          if (!that.$refs[desti.anchor].gsapAnims) return;
+          that.$refs[desti.anchor].gsapAnims.forEach(anim => {
+            anim.play();
+          });
+        })();
+      },
       afterLoad: (orig, desti, dir) => {
-        // from navbar click
+        // pause all hidden anims
+        (function pauseInvisibleAnims() {
+          let anchors = ["home", "histoire", "boisson", "contact"];
+          anchors.splice(desti.index, 1); // only keep invisible sections
+          anchors.forEach(invisibleSection => {
+            that.$refs[invisibleSection].gsapAnims.forEach(anim => {
+              anim.pause();
+            });
+          });
+        })();
+
+        // drink section from navbar click
         if (
           this.$props.navClicked == true &&
-          this.$refs.drink.scrollStep !== 3
+          this.$refs.boisson.scrollComplete == false
         ) {
-          this.$refs.drink.startAnimations();
+          this.$refs.boisson.startAnimations();
           this.$root.navClicked = false; // reset data
         }
-        // from scroll
+        // drink section from scroll
         if (
           desti.anchor == "boisson" &&
           dir == "down" &&
-          this.$refs.drink.scrollStep !== 3
+          this.$refs.boisson.scrollComplete == false
         ) {
           window.fullpage_api.setAllowScrolling(false, "down");
           window.fullpage_api.setKeyboardScrolling(false, "down");
-          this.$refs.drink.initScrollAnim();
+          this.$refs.boisson.initScrollAnim();
         }
         if (desti.anchor == "histoire" && dir == "up") {
           window.fullpage_api.setAllowScrolling(true, "down");

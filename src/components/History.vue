@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <base-title color="blue">L'HISTOIRE</base-title>
-    <HistoryBackground />
+    <history-background ref="historyBackground"></history-background>
     <div class="flex-container">
       <div class="item text col-8 col-lg-6">
         <span>Il existe un royaume,</span>
@@ -26,6 +26,14 @@ export default {
   components: {
     BaseTitle,
     HistoryBackground
+  },
+  data() {
+    return {
+      gsapAnims: []
+    };
+  },
+  mounted() {
+    this.gsapAnims = this.$refs.historyBackground.gsapAnims.flat();
   }
 };
 </script>

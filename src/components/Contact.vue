@@ -47,9 +47,15 @@ export default {
   components: {
     BaseTitle
   },
+  data() {
+    return {
+      gsapAnims: []
+    };
+  },
   methods: {
     animateSphere() {
       // vars
+      const that = this;
       const sphereWidth = this.$refs.sphere.clientWidth;
       const maxX = window.innerWidth - sphereWidth;
       const maxY = window.innerHeight - sphereWidth;
@@ -63,7 +69,8 @@ export default {
 
       // functions
       function moveX(target, direction) {
-        gsap.to(target, {
+        // anims are (re)saved at the same respective index everytime they restart, 'pushing' them instead would be infinite
+        that.gsapAnims[0] = gsap.to(target, {
           x: randomX(),
           ease: "power3.easeInOut",
           duration: randomTime(),
@@ -76,7 +83,7 @@ export default {
         });
       }
       function moveY(target, direction) {
-        gsap.to(target, {
+        that.gsapAnims[1] = gsap.to(target, {
           y: randomY(),
           ease: "power3.easeInOut",
           duration: randomTime(),
@@ -89,7 +96,7 @@ export default {
         });
       }
       function rotate(target, direction) {
-        gsap.to(target, {
+        that.gsapAnims[2] = gsap.to(target, {
           rotation: randomAngle(direction),
           ease: "Sine.easeInOut",
           duration: randomTime2(),
@@ -107,14 +114,13 @@ export default {
         x: 500,
         y: 500
       });
+      // save gsap anims for this component
       moveX(".sphere", 1);
       moveY(".sphere", -1);
       rotate(".sphere", 1);
     }
   },
   mounted() {
-    // let x = gsap.utils.random(50, 70) + "vw";
-    // gsap.to(".sphere", { left: x, bottom: "50vh" });
     this.animateSphere();
   }
 };
@@ -142,17 +148,8 @@ export default {
 .contact-title {
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  margin-bottom: -0.1rem; /* reduce white-space below of 20% font-size */
-}
-@supports (-moz-appearance: none) {
-  .contact-title {
-    line-height: 1;
-  }
-}
-@-moz-document url-prefix() {
-  .contact-title {
-    line-height: 1;
-  }
+  margin-bottom: -2rem; /* reduce white-space below of 20% font-size */
+  line-height: normal;
 }
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {
