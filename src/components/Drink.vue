@@ -119,7 +119,7 @@ export default {
           ease: "power3.out",
           onComplete: () => {
             that.scrollComplete = true;
-            console.log(that.scrollComplete);
+            that.allowScrollDown();
           }
         },
         2

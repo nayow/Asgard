@@ -40,9 +40,9 @@ export default {
       responsiveWidth: 600,
       scrollingSpeed: 1200,
       menu: "#nav",
+      fixedElements: "#nav, #footer",
       onLeave: (orig, desti, dir) => {
         (function playVisibleAnims() {
-          if (!that.$refs[desti.anchor].gsapAnims) return;
           that.$refs[desti.anchor].gsapAnims.forEach(anim => {
             anim.play();
           });

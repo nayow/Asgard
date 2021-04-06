@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div id="footer">
     <div class="flex-container"></div>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-.footer {
+#footer {
   position: fixed;
   bottom: 0px;
   height: 40px;
