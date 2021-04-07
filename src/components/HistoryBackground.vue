@@ -1,14 +1,8 @@
 <template>
   <div class="statue-container">
-    <div class="statue">
-      <img class="left" src="@/assets/statue2.png" />
-    </div>
-    <div class="statue">
-      <img class="middle" src="@/assets/statue2.png" />
-    </div>
-    <div class="statue">
-      <img class="right" src="@/assets/statue2.png" />
-    </div>
+    <img class="statue statue-left" src="@/assets/statue2.png" />
+    <img class="statue statue-middle" src="@/assets/statue2.png" />
+    <img class="statue statue-right" src="@/assets/statue2.png" />
   </div>
 </template>
 
@@ -21,60 +15,60 @@ export default {
   name: "HistoryBackground",
   data() {
     return {
-      gsapAnims: [[], [], []]
+      gsapAnims: [[], [], []],
+      initialAngles: ["120", "70", "240"]
     };
   },
   methods: {
     animateStatues() {
       // vars
       const that = this;
-      const randomX = random(1, 10);
-      const randomY = random(1, 10);
-      const randomDelay = random(0, 1);
-      const randomTime = random(3, 5);
-      const randomTime2 = random(5, 10);
-      const randomAngle = random(-4, 4);
+      const randomX = gsap.utils.random(1, 8, true);
+      const randomY = gsap.utils.random(1, 8, true);
+      const randomDelay = gsap.utils.random(0, 1, true);
+      const randomTime = gsap.utils.random(3, 5, true);
+      const randomTime2 = gsap.utils.random(5, 8, true);
+      const randomAngle = gsap.utils.random(-4, 4, true);
 
       // functions
-      function moveX(target, direction, index) {
-        that.gsapAnims[0][index] = gsap.to(target, {
-          x: "+=" + randomX(direction),
-          ease: "Sine.easeInOut",
+      function moveX(target) {
+        return gsap.to(target, {
+          x: randomX(),
+          ease: "sine.inOut",
           duration: 2,
           onComplete: moveX,
-          onCompleteParams: [target, direction * -1]
+          onCompleteParams: [target],
+          yoyo: true
         });
       }
-      function moveY(target, direction, index) {
-        that.gsapAnims[1][index] = gsap.to(target, {
-          y: "+=" + randomY(direction),
-          ease: "Sine.easeInOut",
-          duration: 2,
+      function moveY(target) {
+        return gsap.to(target, {
+          y: randomY(),
+          ease: "sine.inOut",
+          duration: 2.5,
           onComplete: moveY,
-          onCompleteParams: [target, direction * -1]
+          onCompleteParams: [target],
+          yoyo: true
         });
       }
-      function rotate(target, direction, index) {
-        that.gsapAnims[2][index] = gsap.to(target, {
-          rotation: "+=" + randomAngle(direction),
-          ease: "Sine.easeInOut",
+      function rotate(target) {
+        return gsap.to(target, {
+          rotation: "+=" + randomAngle(),
+          ease: "sine.inOut",
           duration: 2,
           onComplete: rotate,
-          onCompleteParams: [target, direction * -1]
+          onCompleteParams: [target],
+          yoyo: true
         });
-      }
-      function random(min, max) {
-        const delta = max - min;
-        return (direction = 1) => (min + delta * Math.random()) * direction;
       }
 
       // init
-      const statues = gsap.utils.toArray(".statue > img");
+      const statues = gsap.utils.toArray(".statue");
       statues.forEach((statue, index) => {
-        // save gsap anims for this component (three anims per statue)
-        moveX(statue, 1, index);
-        moveY(statue, -1, index);
-        rotate(statue, 1, index);
+        gsap.set(statue, { rotation: that.initialAngles[index] }); // initialize angle
+        that.gsapAnims[0][index] = moveX(statue);
+        that.gsapAnims[1][index] = moveY(statue);
+        that.gsapAnims[2][index] = rotate(statue);
       });
     }
   },
@@ -86,22 +80,15 @@ export default {
 
 <style scoped>
 .statue-container {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  top: 80px; /* move down statues a little closer to the text below */
 }
-img {
-  z-index: 9;
+.statue {
   height: 80vh;
-  margin: 0 10vw;
-}
-.left {
-  transform: rotate(150deg);
-}
-.middle {
-  transform: rotate(70deg);
-}
-.right {
-  transform: rotate(230deg);
+  will-change: transform;
 }
 </style>

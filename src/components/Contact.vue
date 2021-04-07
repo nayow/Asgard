@@ -55,58 +55,53 @@ export default {
   methods: {
     animateSphere() {
       // vars
-      const that = this;
       const sphereWidth = this.$refs.sphere.clientWidth;
       const maxX = window.innerWidth - sphereWidth;
       const maxY = window.innerHeight - sphereWidth;
       const wrapX = gsap.utils.wrapYoyo(0, maxX);
       const wrapY = gsap.utils.wrapYoyo(0, maxY);
-      const randomX = random(0, maxX);
-      const randomY = random(0, maxY);
-      const randomTime = random(10, 20);
-      const randomTime2 = random(5, 10);
-      const randomAngle = random(-180, 180);
+      const randomX = gsap.utils.random(0, maxX, true);
+      const randomY = gsap.utils.random(0, maxY, true);
+      const randomTime = gsap.utils.random(5, 10, true);
+      const randomTime2 = gsap.utils.random(5, 10, true);
+      const randomAngle = gsap.utils.random(-180, 180, true);
 
       // functions
-      function moveX(target, direction) {
+      function moveX(target) {
         // anims are (re)saved at the same respective index everytime they restart, 'pushing' them instead would be infinite
-        that.gsapAnims[0] = gsap.to(target, {
+        return gsap.to(target, {
           x: randomX(),
-          ease: "power3.easeInOut",
+          ease: "sine.inOut",
           duration: randomTime(),
           modifiers: (x, y) => {
             wrapX(parseFloat(x)) + "px";
             wrapY(parseFloat(y)) + "px";
           },
           onComplete: moveX,
-          onCompleteParams: [target, direction]
+          onCompleteParams: [target]
         });
       }
-      function moveY(target, direction) {
-        that.gsapAnims[1] = gsap.to(target, {
+      function moveY(target) {
+        return gsap.to(target, {
           y: randomY(),
-          ease: "power3.easeInOut",
-          duration: randomTime(),
+          ease: "sine.inOut",
+          duration: randomTime2(),
           modifiers: (x, y) => {
             wrapY(parseFloat(y)) + "px";
             wrapX(parseFloat(x)) + "px";
           },
           onComplete: moveY,
-          onCompleteParams: [target, direction]
+          onCompleteParams: [target]
         });
       }
-      function rotate(target, direction) {
-        that.gsapAnims[2] = gsap.to(target, {
-          rotation: randomAngle(direction),
-          ease: "Sine.easeInOut",
-          duration: randomTime2(),
+      function rotate(target) {
+        return gsap.to(target, {
+          rotation: randomAngle(),
+          ease: "sine.inOut",
+          duration: 5,
           onComplete: rotate,
-          onCompleteParams: [target, direction * -1]
+          onCompleteParams: [target]
         });
-      }
-      function random(min, max) {
-        const delta = max - min;
-        return (direction = 1) => (min + delta * Math.random()) * direction;
       }
 
       // init
@@ -114,10 +109,11 @@ export default {
         x: 500,
         y: 500
       });
+
       // save gsap anims for this component
-      moveX(".sphere", 1);
-      moveY(".sphere", -1);
-      rotate(".sphere", 1);
+      this.gsapAnims[0] = moveX(".sphere");
+      this.gsapAnims[1] = moveY(".sphere");
+      this.gsapAnims[2] = rotate(".sphere");
     }
   },
   mounted() {

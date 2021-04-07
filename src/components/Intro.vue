@@ -97,7 +97,7 @@ export default {
             x: x => windowWrap(parseFloat(x)) + "px"
           }
         })
-      );
+        .pause();
     },
     initMask() {
       Draggable.create("#circle-shadow", {

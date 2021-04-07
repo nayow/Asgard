@@ -1,31 +1,29 @@
 /* eslint-disable prettier/prettier */
 <template>
-  <div class="wrapper" id="gsap-container">
-    <base-title color="red">LA BOISSON</base-title>
-    <div id="flex-container" class="d-flex">
-      <div class="box-left">
-        <span>HILDR</span>
-        <drink-description-big
-          text-content="COCKTAIL ENERGISANT"
-        ></drink-description-big>
-        <drink-description-big
-          text-content="GIN GINGEMBRE"
-        ></drink-description-big>
-      </div>
-      <div class="box-center">
-        <drink-background ref="drinkBackground">HILDR</drink-background>
-        <img class="bottle" src="@/assets/hildr.png" />
-      </div>
-      <div class="box-right">
-        <drink-description-small
-          title="Descriptif"
-          description="Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans ce lieu, des clans se sont formés autour de chacunes des déesses. Mais alors que ces clans se donnaient à une guerre éternelle, un portail s’est ouvert vers notre monde."
-        ></drink-description-small>
-        <drink-description-small
-          title="Descriptif technique"
-          :description="['33CL', '5°', 'France']"
-        ></drink-description-small>
-      </div>
+  <base-title color="red">LA BOISSON</base-title>
+  <div id="flex-container" class="d-flex">
+    <div class="box-left">
+      <span>HILDR</span>
+      <drink-description-big
+        text-content="COCKTAIL ENERGISANT"
+      ></drink-description-big>
+      <drink-description-big
+        text-content="GIN GINGEMBRE"
+      ></drink-description-big>
+    </div>
+    <div class="box-center">
+      <drink-background ref="drinkBackground">HILDR</drink-background>
+      <img class="bottle" src="@/assets/hildr.png" />
+    </div>
+    <div class="box-right">
+      <drink-description-small
+        title="Descriptif"
+        description="Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans ce lieu, des clans se sont formés autour de chacunes des déesses. Mais alors que ces clans se donnaient à une guerre éternelle, un portail s’est ouvert vers notre monde."
+      ></drink-description-small>
+      <drink-description-small
+        title="Descriptif technique"
+        :description="['33CL', '5°', 'France']"
+      ></drink-description-small>
     </div>
   </div>
 </template>
@@ -56,39 +54,6 @@ export default {
     };
   },
   methods: {
-    // bringBottle(callback) {
-    //   gsap.from(".bottle", {
-    //     y: "-=200",
-    //     autoAlpha: 0,
-    //     ease: "back",
-    //     duration: 3,
-    //     onComplete: () => {
-    //       callback;
-    //       this.animateBottle();
-    //     }
-    //   });
-    //   this.scrollStep = 1;
-    // },
-    // bringLeft(callback) {
-    //   gsap.from(".box-left", {
-    //     y: "+=500",
-    //     autoAlpha: 0,
-    //     duration: 1,
-    //     ease: "power3.out",
-    //     onComplete: callback
-    //   });
-    //   this.scrollStep = 2;
-    // },
-    // bringRight(callback) {
-    //   gsap.from(".box-right", {
-    //     y: "+=500",
-    //     autoAlpha: 0,
-    //     duration: 1,
-    //     ease: "power3.out",
-    //     onComplete: callback
-    //   });
-    //   this.scrollStep = 3;
-    // },
     initAnimsTimeline() {
       const that = this;
       let tl = gsap.timeline().pause();
@@ -134,14 +99,13 @@ export default {
     },
     animateBottle() {
       // vars
-      const that = this;
-      const randomX = random(0, 10);
-      const randomY = random(5, 10);
-      const randomAngle = random(-4, 4);
+      const randomX = gsap.utils.random(0, 10, true);
+      const randomY = gsap.utils.random(5, 10, true);
+      const randomAngle = gsap.utils.random(-4, 4, true);
 
       // functions
       function moveX(target, direction) {
-        that.gsapAnims[0] = gsap.to(target, {
+        return gsap.to(target, {
           x: "+=" + randomX(direction),
           ease: "Sine.easeInOut",
           duration: 3,
@@ -150,7 +114,7 @@ export default {
         });
       }
       function moveY(target, direction) {
-        that.gsapAnims[1] = gsap.to(target, {
+        return gsap.to(target, {
           y: "+=" + randomY(direction),
           ease: "Sine.easeInOut",
           duration: 2,
@@ -159,7 +123,7 @@ export default {
         });
       }
       function rotate(target, direction) {
-        that.gsapAnims[2] = gsap.to(target, {
+        return gsap.to(target, {
           rotation: "+=" + randomAngle(direction),
           ease: "Sine.easeInOut",
           duration: 3,
@@ -167,19 +131,17 @@ export default {
           onCompleteParams: [target, direction * -1]
         });
       }
-      function random(min, max) {
-        const delta = max - min;
-        return (direction = 1) => (min + delta * Math.random()) * direction;
-      }
 
       // init and gsap anims for this component
-      moveX(".bottle", 1);
-      moveY(".bottle", -1);
-      rotate(".bottle", 1);
+      this.gsapAnims[0] = moveX(".bottle", 1);
+      this.gsapAnims[1] = moveY(".bottle", -1);
+      this.gsapAnims[2] = rotate(".bottle", 1);
     },
     initScrollAnim() {
       const that = this;
-      const container = document.getElementById("gsap-container");
+      const container = document
+        .getElementById("flex-container")
+        .closest(".section");
 
       container.addEventListener(
         "wheel",
@@ -243,22 +205,16 @@ export default {
 </script>
 
 <style scoped>
+#flex-container {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  line-height: 1.2;
+}
 .bottle {
   position: absolute;
   height: 90vh;
   visibility: hidden;
-}
-
-.wrapper {
-  position: relative;
-  height: calc(100vh - 80px);
-}
-
-#flex-container {
-  align-items: center;
-  justify-content: center;
-  height: 100%; /* of wrapper */
-  line-height: 1.2;
 }
 
 .box-left,
@@ -268,7 +224,7 @@ export default {
 }
 
 .box-center {
-  display: flex; /** to center children */
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-basis: 30%;
