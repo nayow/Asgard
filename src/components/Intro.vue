@@ -87,17 +87,16 @@ export default {
       });
       let windowWrap = gsap.utils.wrap(textWidth * -1, textWidth);
       // save this animation to access it globally
-      this.gsapAnims[0] = gsap
-        .to(".asgard", {
-          x: "-=10000px",
-          ease: "none",
-          repeat: -1,
-          duration: 40,
-          modifiers: {
-            x: x => windowWrap(parseFloat(x)) + "px"
-          }
-        })
-        .pause();
+      this.gsapAnims[0] = gsap.to(".asgard", {
+        x: "-=10000px",
+        ease: "none",
+        repeat: -1,
+        delay: 0.5,
+        duration: 40,
+        modifiers: {
+          x: x => windowWrap(parseFloat(x)) + "px"
+        }
+      });
     },
     initMask() {
       Draggable.create("#circle-shadow", {

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 <template>
   <base-title color="red">LA BOISSON</base-title>
-  <div id="flex-container" class="d-flex">
+  <div class="flex-container">
     <div class="box-left">
       <span>HILDR</span>
       <drink-description-big
@@ -12,7 +12,7 @@
       ></drink-description-big>
     </div>
     <div class="box-center">
-      <drink-background ref="drinkBackground">HILDR</drink-background>
+      <span class="title">HILDR</span>
       <img class="bottle" src="@/assets/hildr.png" />
     </div>
     <div class="box-right">
@@ -30,7 +30,6 @@
 
 <script>
 // eslint-disable-next-line prettier/prettier
-import DrinkBackground from "./DrinkBackground.vue";
 import BaseTitle from "./BaseTitle.vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -41,7 +40,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "Drink",
   components: {
-    DrinkBackground,
     BaseTitle,
     DrinkDescriptionBig,
     DrinkDescriptionSmall
@@ -50,14 +48,16 @@ export default {
     return {
       scrollComplete: false,
       gsapAnims: [],
-      onScrollAnims: ""
+      onScrollAnims: "",
+      initialAngle: "60"
     };
   },
   methods: {
+    // INITIALIZE TIMELINE (PAUSED)
     initAnimsTimeline() {
       const that = this;
       let tl = gsap.timeline().pause();
-      gsap.set(".bottle", { rotation: "60deg" });
+      gsap.set(".bottle", { rotation: that.initialAngle });
       tl.from(".bottle", {
         y: "-=200",
         autoAlpha: 0,
@@ -99,33 +99,34 @@ export default {
     },
     animateBottle() {
       // vars
-      const randomX = gsap.utils.random(0, 10, true);
-      const randomY = gsap.utils.random(5, 10, true);
-      const randomAngle = gsap.utils.random(-4, 4, true);
+      const randomX = gsap.utils.random(-5, 5, true);
+      const randomY = gsap.utils.random(-5, 5, true);
+      const randomAngle = gsap.utils.random(0, 8, true);
 
       // functions
-      function moveX(target, direction) {
+      function moveX(target) {
         return gsap.to(target, {
-          x: "+=" + randomX(direction),
-          ease: "Sine.easeInOut",
-          duration: 3,
+          x: randomX(),
+          ease: "sine.inOut",
+          duration: 2,
+          delay: 0.5,
           onComplete: moveX,
-          onCompleteParams: [target, direction * -1]
+          onCompleteParams: [target]
         });
       }
-      function moveY(target, direction) {
+      function moveY(target) {
         return gsap.to(target, {
-          y: "+=" + randomY(direction),
-          ease: "Sine.easeInOut",
+          y: randomY(),
+          ease: "sine.inOut",
           duration: 2,
           onComplete: moveY,
-          onCompleteParams: [target, direction * -1]
+          onCompleteParams: [target]
         });
       }
-      function rotate(target, direction) {
+      function rotate(target, direction = 1) {
         return gsap.to(target, {
-          rotation: "+=" + randomAngle(direction),
-          ease: "Sine.easeInOut",
+          rotation: "+=" + randomAngle() * direction,
+          ease: "sine.inOut",
           duration: 3,
           onComplete: rotate,
           onCompleteParams: [target, direction * -1]
@@ -133,66 +134,11 @@ export default {
       }
 
       // init and gsap anims for this component
-      this.gsapAnims[0] = moveX(".bottle", 1);
-      this.gsapAnims[1] = moveY(".bottle", -1);
-      this.gsapAnims[2] = rotate(".bottle", 1);
+      this.gsapAnims[0] = moveX(".bottle");
+      this.gsapAnims[1] = moveY(".bottle");
+      this.gsapAnims[2] = rotate(".bottle");
     },
-    initScrollAnim() {
-      const that = this;
-      const container = document
-        .getElementById("flex-container")
-        .closest(".section");
-
-      container.addEventListener(
-        "wheel",
-        function(e) {
-          if (e.deltaY > 0) {
-            that.onScrollAnims.play();
-          }
-        },
-        { once: true, passive: true }
-      );
-
-      // function displayBottle() {
-      //   container.addEventListener(
-      //     "wheel",
-      //     function(e) {
-      //       if (e.deltaY > 0) {
-      //         that.bringBottle(displayLeft);
-      //       }
-      //     },
-      //     { once: true, passive: true }
-      //   );
-      // }
-      // function displayLeft() {
-      //   container.addEventListener(
-      //     "wheel",
-      //     function(e) {
-      //       if (e.deltaY > 0) {
-      //         that.bringLeft(displayRight);
-      //       }
-      //     },
-      //     { once: true, passive: true }
-      //   );
-      // }
-      // function displayRight() {
-      //   container.addEventListener(
-      //     "wheel",
-      //     function(e) {
-      //       if (e.deltaY > 0) {
-      //         that.bringRight(that.allowScrollDown);
-      //       }
-      //     },
-      //     { once: true, passive: true }
-      //   );
-      // }
-
-      // if user scrolls back up too early it will retrieve its latest position
-      // if (this.scrollStep == 0) return displayBottle();
-      // if (this.scrollStep == 1) return displayLeft();
-      // if (this.scrollStep == 2) return displayRight();
-    },
-    // by clicking in the menu animations must directly fire
+    // trigger with no scroll event
     startAnimations() {
       this.onScrollAnims.play();
       this.allowScrollDown();
@@ -205,28 +151,40 @@ export default {
 </script>
 
 <style scoped>
-#flex-container {
+.flex-container {
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  line-height: 1.2;
+}
+.title {
+  position: relative;
+  font-size: 50vh;
+  bottom: 6vh; /* 12% of font-size is the extra space to add at the bottom to have the text vertically centered in the parent (for this font only) */
+  font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .bottle {
-  position: absolute;
   height: 90vh;
+  will-change: transform;
   visibility: hidden;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: -10%;
+  right: 0;
+  bottom: 0;
 }
 
 .box-left,
 .box-right {
-  flex-basis: 14%;
+  flex-basis: 16%;
   visibility: hidden;
+  will-change: transform;
 }
 
 .box-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-basis: 30%;
+  will-change: transform;
 }
 </style>

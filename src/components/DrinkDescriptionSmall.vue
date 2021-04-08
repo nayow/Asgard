@@ -23,7 +23,7 @@ export default {
 <style scoped>
 div {
   margin-top: 1rem;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 hr {
   border: 2px solid rgba(255, 255, 255, 0.99);

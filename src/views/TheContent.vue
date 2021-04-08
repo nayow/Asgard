@@ -62,14 +62,6 @@ export default {
           });
         })();
 
-        // drink section from navbar click
-        if (
-          this.$props.navClicked == true &&
-          this.$refs.boisson.scrollComplete == false
-        ) {
-          this.$refs.boisson.startAnimations();
-          this.$root.navClicked = false; // reset data
-        }
         // drink section from scroll
         if (
           desti.anchor == "boisson" &&
@@ -78,7 +70,7 @@ export default {
         ) {
           window.fullpage_api.setAllowScrolling(false, "down");
           window.fullpage_api.setKeyboardScrolling(false, "down");
-          this.$refs.boisson.initScrollAnim();
+          this.$refs.boisson.startAnimations();
         }
         if (desti.anchor == "histoire" && dir == "up") {
           window.fullpage_api.setAllowScrolling(true, "down");
