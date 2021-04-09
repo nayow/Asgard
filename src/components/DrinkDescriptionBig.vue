@@ -23,6 +23,17 @@ export default {
 div {
   margin-bottom: 1rem;
 }
+/* sm breakpoint */
+@media (max-width: 768px) {
+  div {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 576px) {
+  div {
+    font-size: 0.7rem;
+  }
+}
 span {
   letter-spacing: unset;
 }

@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
 <template>
   <base-title color="red">LA BOISSON</base-title>
-  <div class="flex-container">
-    <div class="box-left">
+  <div
+    class="flex-container d-flex flex-column flex-sm-row justify-content-center "
+  >
+    <div class="box-left d-none d-sm-block col-9 col-sm-auto">
       <span>HILDR</span>
       <drink-description-big
         text-content="COCKTAIL ENERGISANT"
@@ -15,7 +17,7 @@
       <span class="title">HILDR</span>
       <img class="bottle" src="@/assets/hildr.png" />
     </div>
-    <div class="box-right">
+    <div class="box-right col-9 col-sm-auto">
       <drink-description-small
         title="Descriptif"
         description="Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans ce lieu, des clans se sont formés autour de chacunes des déesses. Mais alors que ces clans se donnaient à une guerre éternelle, un portail s’est ouvert vers notre monde."
@@ -152,7 +154,7 @@ export default {
 
 <style scoped>
 .flex-container {
-  display: flex;
+  /* display: flex; in class*/
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -176,16 +178,46 @@ export default {
   right: 0;
   bottom: 0;
 }
+/* wide screens */
+@media (min-aspect-ratio: 12/10) {
+  .title {
+    font-size: 50vh;
+  }
+  .bottle {
+    height: 90vh;
+  }
+}
+/* tall screens */
+@media (max-aspect-ratio: 12/10) {
+  .title {
+    font-size: 35vw;
+  }
+  .bottle {
+    height: 60vw;
+  }
+}
+
+/* safari behaves differently */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .bottle {
+      left: 0 !important;
+    }
+  }
+}
 
 .box-left,
 .box-right {
   flex-basis: 16%;
   visibility: hidden;
   will-change: transform;
+  z-index: 0;
 }
 
 .box-center {
   flex-basis: 30%;
   will-change: transform;
+  z-index: 1;
+  line-height: normal;
 }
 </style>

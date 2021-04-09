@@ -21,6 +21,6 @@ export default {
 <style scoped>
 .base-title__content {
   position: absolute;
-  padding-top: 3em;
+  padding-top: 2em;
 }
 </style>

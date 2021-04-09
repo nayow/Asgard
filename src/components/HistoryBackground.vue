@@ -86,9 +86,10 @@ export default {
   align-items: center;
   position: relative;
   top: 80px; /* move down statues a little closer to the text below */
+  margin-bottom: auto;
 }
 .statue {
-  height: 40vw;
+  height: 35vw;
   will-change: transform;
 }
 </style>
