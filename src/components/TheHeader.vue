@@ -54,6 +54,8 @@ export default {
   justify-content: space-between;
   width: 100%;
   padding: 0 0.5rem;
+  font-family: "Univers LT Std", "Roboto", sans-serif;
+  font-size: 1.4rem;
 }
 /* @supports (-moz-appearance: none) {
   #nav {

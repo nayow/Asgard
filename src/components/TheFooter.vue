@@ -10,14 +10,13 @@ export default {
   name: "TheFooter",
   data() {
     return {
-      viewportMaxWidth: window.screen.width,
-      elementWidth: 360,
+      elementWidth: 500,
       gsapAnims: []
     };
   },
   mounted() {
-    const elementsNb =
-      Math.floor(this.viewportMaxWidth / this.elementWidth) + 2; // always covers over 100vw with 1 entire element out
+    const viewportMaxWidth = window.screen.width;
+    const elementsNb = Math.round(viewportMaxWidth / this.elementWidth) + 2; // always covers over 100vw with at least 1 entire element out
     const container = document.querySelector(".flex-container");
 
     // Create good amount of boxes
@@ -36,10 +35,11 @@ export default {
       (elementsNb - 1) * this.elementWidth
     );
     gsap.set(".sliding-box", {
-      x: i => (i - 1) * this.elementWidth
+      x: i => (i - 1) * this.elementWidth,
+      z: 0.01 // helps with x or y translation
     });
     gsap.to(".sliding-box", {
-      x: "+=5000px",
+      x: "+=5000",
       ease: "none",
       repeat: -1,
       duration: 50,
@@ -59,14 +59,15 @@ export default {
   background-color: whitesmoke;
   color: black;
   user-select: none; /* requires prefix */
+  font-family: "Univers LT Std", "Roboto", sans-serif;
+  font-size: 1.4rem;
 }
 
 .flex-container {
   height: 100%;
   width: 100vw;
-  display: flex;
   padding: 0.5rem;
-  justify-content: flex-start;
+  display: flex;
   align-items: center;
 }
 /* @supports (-moz-appearance: none) {

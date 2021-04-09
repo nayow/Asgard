@@ -32,6 +32,7 @@
       </div>
     </div>
   </div>
+  <!-- TODO METTRE DANS LE WRAPPER? -->
   <div class="item bottom-line">
     <div class="d-inline-block">Conditions générales de vente /&nbsp;</div>
     <div class="d-inline-block">Mentions légales /&nbsp;</div>
@@ -49,19 +50,19 @@ export default {
   },
   data() {
     return {
-      gsapAnims: []
+      gsapAnims: [],
+      maxX: 1000, // random init
+      maxY: 1000
     };
   },
   methods: {
     animateSphere() {
       // vars
-      const sphereWidth = this.$refs.sphere.clientWidth;
-      const maxX = window.innerWidth - sphereWidth;
-      const maxY = window.innerHeight - sphereWidth;
-      const wrapX = gsap.utils.wrapYoyo(0, maxX);
-      const wrapY = gsap.utils.wrapYoyo(0, maxY);
-      const randomX = gsap.utils.random(0, maxX, true);
-      const randomY = gsap.utils.random(0, maxY, true);
+
+      const wrapX = gsap.utils.wrapYoyo(0, this.maxX);
+      const wrapY = gsap.utils.wrapYoyo(0, this.maxY);
+      const randomX = gsap.utils.random(0, this.maxX, true);
+      const randomY = gsap.utils.random(0, this.maxY, true);
       const randomTime = gsap.utils.random(5, 10, true);
       const randomTime2 = gsap.utils.random(5, 10, true);
       const randomAngle = gsap.utils.random(-180, 180, true);
@@ -72,7 +73,7 @@ export default {
         return gsap.to(target, {
           x: randomX(),
           ease: "sine.inOut",
-          duration: randomTime(),
+          duration: 7,
           modifiers: (x, y) => {
             wrapX(parseFloat(x)) + "px";
             wrapY(parseFloat(y)) + "px";
@@ -85,22 +86,22 @@ export default {
         return gsap.to(target, {
           y: randomY(),
           ease: "sine.inOut",
-          duration: randomTime2(),
+          duration: 8,
           modifiers: (x, y) => {
-            wrapY(parseFloat(y)) + "px";
             wrapX(parseFloat(x)) + "px";
+            wrapY(parseFloat(y)) + "px";
           },
           onComplete: moveY,
           onCompleteParams: [target]
         });
       }
-      function rotate(target) {
+      function rotate(target, direction = 1) {
         return gsap.to(target, {
-          rotation: randomAngle(),
+          rotation: randomAngle() * direction,
           ease: "sine.inOut",
-          duration: 5,
+          duration: 9,
           onComplete: rotate,
-          onCompleteParams: [target]
+          onCompleteParams: [target, direction * -1]
         });
       }
 
@@ -111,12 +112,18 @@ export default {
       });
 
       // save gsap anims for this component
-      this.gsapAnims[0] = moveX(".sphere");
-      this.gsapAnims[1] = moveY(".sphere");
-      this.gsapAnims[2] = rotate(".sphere");
+      // this.gsapAnims[0] = moveX(".sphere");
+      // this.gsapAnims[1] = moveY(".sphere");
+      // this.gsapAnims[2] = rotate(".sphere");
+      moveX(".sphere");
+      moveY(".sphere");
+      rotate(".sphere");
     }
   },
   mounted() {
+    const sphereWidth = this.$refs.sphere.clientWidth;
+    this.maxX = window.innerWidth - sphereWidth;
+    this.maxY = window.innerHeight - sphereWidth;
     this.animateSphere();
   }
 };
@@ -125,8 +132,9 @@ export default {
 <style scoped>
 .sphere {
   position: absolute;
+  will-change: transform;
   height: 30vh;
-  z-index: 9;
+  z-index: 1;
 }
 .wrapper {
   position: relative;
@@ -146,6 +154,7 @@ export default {
     "Lucida Sans", Arial, sans-serif;
   margin-bottom: -2rem; /* reduce white-space below of 20% font-size */
   line-height: normal;
+  user-select: none; /* requires prefix */
 }
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {

@@ -88,7 +88,7 @@ export default {
   top: 80px; /* move down statues a little closer to the text below */
 }
 .statue {
-  height: 80vh;
+  height: 40vw;
   will-change: transform;
 }
 </style>

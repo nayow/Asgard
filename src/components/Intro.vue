@@ -18,8 +18,8 @@
             id="mask-circle"
             cx="70%"
             cy="50%"
-            rx="120"
-            ry="200"
+            rx="156"
+            ry="260"
             style="fill: #000"
           />
         </clipPath>
@@ -57,8 +57,8 @@
         id="circle-shadow"
         cx="70%"
         cy="50%"
-        rx="120"
-        ry="200"
+        rx="156"
+        ry="260"
         stroke="url(#gradient)"
         style="fill: transparent; stroke-width: 5;"
       />
@@ -82,16 +82,20 @@ export default {
     triggerSlide() {
       const CSSfontSize = 110;
       let textWidth = CSSfontSize * 22; // 13.8 is font-size to width ratio so we take more to have space
+      let elementsNb = 3;
       gsap.set(".asgard", {
         x: i => (i - 1) * textWidth
       });
-      let windowWrap = gsap.utils.wrap(textWidth * -1, textWidth);
+      let windowWrap = gsap.utils.wrap(
+        textWidth * -1,
+        (elementsNb - 1) * textWidth
+      );
       // save this animation to access it globally
       this.gsapAnims[0] = gsap.to(".asgard", {
         x: "-=10000px",
         ease: "none",
         repeat: -1,
-        delay: 0.5,
+        delay: 0.8,
         duration: 40,
         modifiers: {
           x: x => windowWrap(parseFloat(x)) + "px"

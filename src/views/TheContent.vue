@@ -38,29 +38,30 @@ export default {
       licenseKey: "abc",
       anchors: ["home", "histoire", "boisson", "contact"],
       responsiveWidth: 600,
-      scrollingSpeed: 1200,
+      scrollingSpeed: 1500,
       menu: "#nav",
       fixedElements: "#nav, #footer",
       paddingTop: "40px",
       paddingBottom: "40px",
-      onLeave: (orig, desti, dir) => {
-        (function playVisibleAnims() {
-          that.$refs[desti.anchor].gsapAnims.forEach(anim => {
-            anim.play();
-          });
-        })();
-      },
+      // TODO TRY WITH GSAP TICKER ADD ()
+      // onLeave: (orig, desti, dir) => {
+      //   (async function playVisibleAnims() {
+      //     that.$refs[desti.anchor].gsapAnims.forEach(anim => {
+      //       anim.play();
+      //     });
+      //   })();
+      // },
       afterLoad: (orig, desti, dir) => {
         // pause all hidden anims
-        (function pauseInvisibleAnims() {
-          let anchors = ["home", "histoire", "boisson", "contact"];
-          anchors.splice(desti.index, 1); // only keep invisible sections
-          anchors.forEach(invisibleSection => {
-            that.$refs[invisibleSection].gsapAnims.forEach(anim => {
-              anim.pause();
-            });
-          });
-        })();
+        // (async function pauseInvisibleAnims() {
+        //   let anchors = ["home", "histoire", "boisson", "contact"];
+        //   anchors.splice(desti.index, 1); // only keep invisible sections
+        //   anchors.forEach(invisibleSection => {
+        //     that.$refs[invisibleSection].gsapAnims.forEach(anim => {
+        //       anim.pause();
+        //     });
+        //   });
+        // })();
 
         // drink section from scroll
         if (
@@ -82,4 +83,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>
