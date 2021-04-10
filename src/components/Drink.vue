@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
 <template>
   <base-title color="red">LA BOISSON</base-title>
-  <div
-    class="flex-container d-flex flex-column flex-sm-row justify-content-center "
-  >
-    <div class="box-left d-none d-sm-block col-9 col-sm-auto">
+  <img class="bottle" src="@/assets/hildr.png" />
+  <div class="flex-container flex-column flex-sm-row">
+    <div class="box-left d-none d-sm-block col-9">
       <span>HILDR</span>
       <drink-description-big
         text-content="COCKTAIL ENERGISANT"
@@ -15,9 +14,8 @@
     </div>
     <div class="box-center">
       <span class="title">HILDR</span>
-      <img class="bottle" src="@/assets/hildr.png" />
     </div>
-    <div class="box-right col-9 col-sm-auto">
+    <div class="box-right col-9">
       <drink-description-small
         title="Descriptif"
         description="Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans ce lieu, des clans se sont formés autour de chacunes des déesses. Mais alors que ces clans se donnaient à une guerre éternelle, un portail s’est ouvert vers notre monde."
@@ -60,17 +58,18 @@ export default {
       const that = this;
       let tl = gsap.timeline().pause();
       gsap.set(".bottle", { rotation: that.initialAngle });
-      tl.from(".bottle", {
-        y: "-=200",
-        autoAlpha: 0,
+      tl.to(".bottle", {
+        autoAlpha: 1,
+        yPercent: 50,
         ease: "back",
-        duration: 3,
-        onComplete: () => this.animateBottle()
+        duration: 3
+        // onComplete: this.animateBottle()
       });
       tl.from(
         ".box-left",
         {
           y: "+=500",
+          z: 0.01,
           autoAlpha: 0,
           duration: 1,
           ease: "power3.out"
@@ -81,6 +80,7 @@ export default {
         ".box-right",
         {
           y: "+=500",
+          z: 0.01,
           autoAlpha: 0,
           duration: 1,
           ease: "power3.out",
@@ -105,10 +105,15 @@ export default {
       const randomY = gsap.utils.random(-5, 5, true);
       const randomAngle = gsap.utils.random(0, 8, true);
 
+      // init and gsap anims for this component
+      moveX(".bottle");
+      moveY(".bottle");
+      rotate(".bottle");
+
       // functions
       function moveX(target) {
-        return gsap.to(target, {
-          x: randomX(),
+        gsap.to(target, {
+          x: "+=" + randomX(),
           ease: "sine.inOut",
           duration: 2,
           delay: 0.5,
@@ -117,8 +122,8 @@ export default {
         });
       }
       function moveY(target) {
-        return gsap.to(target, {
-          y: randomY(),
+        gsap.to(target, {
+          y: "+=" + randomY(),
           ease: "sine.inOut",
           duration: 2,
           onComplete: moveY,
@@ -126,7 +131,7 @@ export default {
         });
       }
       function rotate(target, direction = 1) {
-        return gsap.to(target, {
+        gsap.to(target, {
           rotation: "+=" + randomAngle() * direction,
           ease: "sine.inOut",
           duration: 3,
@@ -134,11 +139,6 @@ export default {
           onCompleteParams: [target, direction * -1]
         });
       }
-
-      // init and gsap anims for this component
-      this.gsapAnims[0] = moveX(".bottle");
-      this.gsapAnims[1] = moveY(".bottle");
-      this.gsapAnims[2] = rotate(".bottle");
     },
     // trigger with no scroll event
     startAnimations() {
@@ -154,29 +154,30 @@ export default {
 
 <style scoped>
 .flex-container {
-  /* display: flex; in class*/
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  position: relative;
+  height: inherit;
+  /* position: relative; */
 }
 .title {
-  position: relative;
   font-size: 50vh;
-  bottom: 6vh; /* 12% of font-size is the extra space to add at the bottom to have the text vertically centered in the parent (for this font only) */
+  /* bottom: 6vh; 12% of font-size is the extra space to add at the bottom to have the text vertically centered in the parent (for this font only) */
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  line-height: normal;
 }
 .bottle {
   height: 90vh;
-  will-change: transform;
   visibility: hidden;
   position: absolute;
   margin: auto;
   top: 0;
-  left: -10%;
-  right: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
+  will-change: transform;
+  z-index: 1; /* bottle and side-boxes must be on different layers */
 }
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {
@@ -197,27 +198,13 @@ export default {
   }
 }
 
-/* safari behaves differently */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) {
-    .bottle {
-      left: 0 !important;
-    }
-  }
-}
-
 .box-left,
 .box-right {
   flex-basis: 16%;
   visibility: hidden;
-  will-change: transform;
-  z-index: 0;
 }
 
 .box-center {
   flex-basis: 30%;
-  will-change: transform;
-  z-index: 1;
-  line-height: normal;
 }
 </style>

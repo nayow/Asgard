@@ -38,7 +38,7 @@ export default {
       licenseKey: "abc",
       anchors: ["home", "histoire", "boisson", "contact"],
       responsiveWidth: 600,
-      scrollingSpeed: 1500,
+      scrollingSpeed: 1000,
       menu: "#nav",
       fixedElements: "#nav, #footer",
       paddingTop: "40px",
@@ -86,5 +86,6 @@ export default {
 <style scoped>
 #fullpage {
   overflow: hidden;
+  will-change: transform;
 }
 </style>

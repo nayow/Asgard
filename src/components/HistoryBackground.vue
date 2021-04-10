@@ -8,8 +8,6 @@
 
 <script>
 import { gsap } from "gsap";
-import { Draggable } from "gsap/Draggable";
-gsap.registerPlugin(Draggable);
 
 export default {
   name: "HistoryBackground",
@@ -65,7 +63,7 @@ export default {
       // init
       const statues = gsap.utils.toArray(".statue");
       statues.forEach((statue, index) => {
-        gsap.set(statue, { rotation: that.initialAngles[index] }); // initialize angle
+        gsap.set(statue, { rotation: that.initialAngles[index], z: 0.01 }); // initialize angle
         that.gsapAnims[0][index] = moveX(statue);
         that.gsapAnims[1][index] = moveY(statue);
         that.gsapAnims[2][index] = rotate(statue);
@@ -84,12 +82,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  top: 80px; /* move down statues a little closer to the text below */
-  margin-bottom: auto;
 }
 .statue {
   height: 35vw;
-  will-change: transform;
 }
 </style>

@@ -57,16 +57,7 @@ export default {
   font-family: "Univers LT Std", "Roboto", sans-serif;
   font-size: 1.4rem;
 }
-/* @supports (-moz-appearance: none) {
-  #nav {
-    align-items: center;
-  }
-}
-@-moz-document url-prefix() {
-  #nav {
-    align-items: center;
-  }
-} */
+
 .item {
   white-space: nowrap;
 }
