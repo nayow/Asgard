@@ -1,8 +1,16 @@
 <template>
-  <div class="statue-container">
-    <img class="statue statue-left" src="@/assets/statue2.png" />
+  <div
+    class="statue-container justify-content-center justify-content-sm-evenly justify-content-md-between"
+  >
+    <img
+      class="statue statue-left d-none d-md-block"
+      src="@/assets/statue2.png"
+    />
     <img class="statue statue-middle" src="@/assets/statue2.png" />
-    <img class="statue statue-right" src="@/assets/statue2.png" />
+    <img
+      class="statue statue-right d-none d-sm-block"
+      src="@/assets/statue2.png"
+    />
   </div>
 </template>
 
@@ -49,14 +57,13 @@ export default {
           yoyo: true
         });
       }
-      function rotate(target) {
+      function rotate(target, direction = 1) {
         return gsap.to(target, {
-          rotation: "+=" + randomAngle(),
+          rotation: "+=" + randomAngle() * direction,
           ease: "sine.inOut",
           duration: 2,
           onComplete: rotate,
-          onCompleteParams: [target],
-          yoyo: true
+          onCompleteParams: [target, direction * -1]
         });
       }
 
@@ -82,8 +89,24 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  top: 10vh;
+  margin: auto; /* as a flex child, to make it center in the available space */
 }
 .statue {
   height: 35vw;
+  z-index: 5;
+}
+/* md breakpoint : 2 statues */
+@media (max-width: 768px) {
+  .statue {
+    height: 45vw;
+  }
+}
+/* sm breakpoint : 1 statue */
+@media (max-width: 576px) {
+  .statue {
+    height: 75vw;
+  }
 }
 </style>

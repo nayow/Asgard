@@ -36,7 +36,8 @@ export default {
     );
     gsap.set(".sliding-box", {
       x: i => (i - 1) * this.elementWidth,
-      z: 0.01 // helps with x or y translation
+      z: 0.01, // helps with x or y translation
+      rotation: 0.01
     });
     gsap.to(".sliding-box", {
       x: "+=5000",

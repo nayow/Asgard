@@ -10,15 +10,15 @@
       ASGARD
     </div>
   </div>
-  <svg>
+  <svg viewPort="0 0 100 100">
     <defs>
       <clipPath id="mask">
         <ellipse
           id="mask-circle"
           cx="70%"
           cy="50%"
-          rx="156"
-          ry="260"
+          rx="100"
+          ry="160"
           style="fill: #000"
         />
       </clipPath>
@@ -52,8 +52,8 @@
       id="circle-shadow"
       cx="70%"
       cy="50%"
-      rx="156"
-      ry="260"
+      rx="100"
+      ry="160"
       stroke="url(#gradient)"
       style="fill: transparent; stroke-width: 5;"
     />
@@ -70,7 +70,8 @@ export default {
   data() {
     return {
       gsapAnims: [],
-      elementWidth: 0 // init
+      elementWidth: 0,
+      currentViewportHeight: 0
     };
   },
   methods: {
@@ -89,6 +90,7 @@ export default {
       });
       gsap.to(".asgard", {
         x: "-=" + totalWidth,
+        rotation: 0.01,
         ease: "none",
         repeat: -1,
         duration: 20,
@@ -106,14 +108,36 @@ export default {
           });
         }
       });
+    },
+    scaleEllipse(vh) {
+      gsap.set(["#mask-circle", "#circle-shadow"], {
+        attr: {
+          ry: vh / 3,
+          rx: vh / 5
+        }
+      });
+    },
+    onResize() {
+      window.addEventListener("resize", () => {
+        this.$nextTick(() => (this.currentViewportHeight = window.innerHeight));
+      });
+    }
+  },
+  watch: {
+    currentViewportHeight: function(newVh) {
+      this.scaleEllipse(newVh);
     }
   },
   mounted() {
+    this.currentViewportHeight = window.innerHeight;
+
     // because box width is set to 200vh + 40vh padding
-    this.elementWidth = window.innerHeight * 2.4;
+    this.elementWidth = this.currentViewportHeight * 2.4;
 
     this.triggerSlide();
     this.initMask();
+    this.scaleEllipse(this.currentViewportHeight);
+    this.onResize();
   }
 };
 </script>
@@ -136,11 +160,13 @@ export default {
 }
 
 svg {
+  position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  z-index: 11;
 }
 
 #background-statue {
