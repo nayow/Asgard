@@ -158,6 +158,17 @@ export default {
   line-height: normal;
   user-select: none; /* prefix */
 }
+/* Different line-height for FF */
+@supports (-moz-appearance: none) {
+  .asgard {
+    line-height: 1;
+  }
+}
+@-moz-document url-prefix() {
+  .asgard {
+    line-height: 1;
+  }
+}
 
 svg {
   position: absolute;
