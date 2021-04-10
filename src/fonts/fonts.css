@@ -1,8 +1,11 @@
 @font-face {
   font-family: "Futhark";
   src: local("Futhark"),
-  url(./Futhark-Regular-Fixed.otf) format("opentype");
+  url(./Futhark-Regular-Fixed.otf) format("opentype"),
+  url(./Futhark-Regular-Fixed.woff2) format('woff2'),
+  url(./Futhark-Regular-Fixed.woff) format('woff');
 }
+
 @font-face {
   font-family: 'Univers LT Std';
   src: url('UniversLTStd.eot');
