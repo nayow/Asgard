@@ -10,54 +10,60 @@
       ASGARD
     </div>
   </div>
-  <svg viewPort="0 0 100 100">
-    <defs>
-      <clipPath id="mask">
-        <ellipse
-          id="mask-circle"
-          cx="70%"
-          cy="50%"
-          rx="100"
-          ry="160"
-          style="fill: #000"
+  <div class="svg-container">
+    <svg>
+      <defs>
+        <clipPath id="mask">
+          <ellipse
+            id="mask-circle"
+            cx="70%"
+            cy="50%"
+            rx="100"
+            ry="160"
+            style="fill: #000"
+          />
+        </clipPath>
+        <linearGradient
+          id="gradient"
+          x1=".5"
+          x2=".5"
+          y2="1"
+          gradientTransform="rotate(-10)"
+        >
+          <stop stop-color="#effbff" />
+          <stop stop-color="#effbff" />
+          <stop offset=".1" stop-color="#00c9ff" />
+          <stop offset=".16" stop-color="#00c9ff" />
+          <stop offset=".28" stop-color="#f00" stop-opacity=".8" />
+          <stop offset=".34" stop-color="#ff59c2" />
+          <stop offset=".53" stop-color="#00c9ff" />
+          <stop offset=".58" stop-color="#fff" />
+          <stop offset=".65" stop-color="#fbff00" />
+          <stop offset=".75" stop-color="#00c9ff" />
+          <stop offset=".91" stop-color="#ff2d9b" />
+          <stop offset="1" stop-color="#f00" stop-opacity=".8" />
+          <stop offset="1" stop-color="#ff0808" />
+        </linearGradient>
+      </defs>
+      <g clip-path="url(#mask)">
+        <rect width="100%" height="100%" fill="#000" />
+        <image
+          x="25%"
+          id="background-statue"
+          xlink:href="@/assets/statue.png"
         />
-      </clipPath>
-      <linearGradient
-        id="gradient"
-        x1=".5"
-        x2=".5"
-        y2="1"
-        gradientTransform="rotate(-10)"
-      >
-        <stop stop-color="#effbff" />
-        <stop stop-color="#effbff" />
-        <stop offset=".1" stop-color="#00c9ff" />
-        <stop offset=".16" stop-color="#00c9ff" />
-        <stop offset=".28" stop-color="#f00" stop-opacity=".8" />
-        <stop offset=".34" stop-color="#ff59c2" />
-        <stop offset=".53" stop-color="#00c9ff" />
-        <stop offset=".58" stop-color="#fff" />
-        <stop offset=".65" stop-color="#fbff00" />
-        <stop offset=".75" stop-color="#00c9ff" />
-        <stop offset=".91" stop-color="#ff2d9b" />
-        <stop offset="1" stop-color="#f00" stop-opacity=".8" />
-        <stop offset="1" stop-color="#ff0808" />
-      </linearGradient>
-    </defs>
-    <g clip-path="url(#mask)">
-      <rect width="100%" height="100%" fill="#000" />
-      <image x="25%" id="background-statue" xlink:href="@/assets/statue.png" />
-    </g>
-    <ellipse
-      id="circle-shadow"
-      cx="70%"
-      cy="50%"
-      rx="100"
-      ry="160"
-      stroke="url(#gradient)"
-      style="fill: transparent; stroke-width: 5;"
-    />
-  </svg>
+      </g>
+      <ellipse
+        id="circle-shadow"
+        cx="70%"
+        cy="50%"
+        rx="100"
+        ry="160"
+        stroke="url(#gradient)"
+        style="fill: transparent; stroke-width: 5;"
+      />
+    </svg>
+  </div>
 </template>
 
 <script>
@@ -86,6 +92,9 @@ export default {
       const totalWidth = elementsNb * this.elementWidth;
       gsap.set(".asgard", {
         x: i => i * this.elementWidth,
+        z: 0.01
+      });
+      gsap.set(".svg-container", {
         z: 0.01
       });
       gsap.to(".asgard", {
@@ -150,13 +159,13 @@ export default {
 }
 .asgard {
   position: absolute;
-  z-index: 10;
   font-size: 100vh;
   padding: 0 20vh;
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   line-height: normal;
   user-select: none; /* prefix */
+  z-index: 2;
 }
 /* Different line-height for FF */
 @supports (-moz-appearance: none) {
@@ -170,14 +179,19 @@ export default {
   }
 }
 
-svg {
+/* wrap svg in div so it doesn't get repainted everytime */
+.svg-container {
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
   width: 100%;
   height: 100vh;
-  z-index: 11;
+  z-index: 4;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
 }
 
 #background-statue {

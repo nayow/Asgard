@@ -95,7 +95,7 @@ export default {
 }
 .statue {
   height: 35vw;
-  z-index: 5;
+  z-index: 6;
 }
 /* md breakpoint : 2 statues */
 @media (max-width: 768px) {

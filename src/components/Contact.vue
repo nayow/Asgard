@@ -134,7 +134,7 @@ export default {
   position: absolute;
   will-change: transform;
   height: 30vh;
-  z-index: 1;
+  z-index: 10;
 }
 .wrapper {
   position: relative;

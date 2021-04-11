@@ -62,8 +62,8 @@ export default {
         autoAlpha: 1,
         yPercent: 50,
         ease: "back",
-        duration: 3
-        // onComplete: this.animateBottle()
+        duration: 3,
+        onComplete: this.animateBottle()
       });
       tl.from(
         ".box-left",
@@ -177,7 +177,7 @@ export default {
   left: 0;
   right: 0;
   will-change: transform;
-  z-index: 1; /* bottle and side-boxes must be on different layers */
+  z-index: 8; /* bottle and side-boxes must be on different layers */
 }
 /* wide screens */
 @media (min-aspect-ratio: 12/10) {
