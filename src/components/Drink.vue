@@ -60,7 +60,7 @@ export default {
       gsap.set(".bottle", { rotation: that.initialAngle });
       tl.to(".bottle", {
         autoAlpha: 1,
-        yPercent: 50,
+        top: "25%",
         ease: "back",
         duration: 3,
         onComplete: this.animateBottle()
