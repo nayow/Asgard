@@ -1,6 +1,6 @@
 <template>
-  <TheHeader @onNavClicked="setNavClicked" />
-  <router-view :navClicked="navClicked" />
+  <TheHeader v-show="$route.name !== 'AgeCheck'" />
+  <router-view />
   <TheFooter />
 </template>
 
@@ -13,16 +13,6 @@ export default {
   components: {
     TheHeader,
     TheFooter
-  },
-  data() {
-    return {
-      navClicked: false
-    };
-  },
-  methods: {
-    setNavClicked() {
-      this.navClicked = true;
-    }
   }
 };
 </script>
@@ -30,11 +20,15 @@ export default {
 <style>
 html {
   font-size: 18px; /* new default rem */
+  height: -webkit-fill-available;
 }
 
 body {
   margin: 0px;
   background-color: black;
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
 }
 
 #app {

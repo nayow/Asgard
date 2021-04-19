@@ -31,7 +31,6 @@ export default {
     Drink,
     Contact
   },
-  props: ["navClicked"],
   mounted() {
     const that = this;
     new fullpage("#fullpage", {
@@ -50,6 +49,10 @@ export default {
       //     });
       //   })();
       // },
+      onLeave: (orig, desti, dir) => {
+        // prevent scroll if the mask is being dragged
+        if (orig.anchor == "home" && this.$refs.home.isDragging) return false;
+      },
       afterLoad: (orig, desti, dir) => {
         // pause all hidden anims
         // (async function pauseInvisibleAnims() {

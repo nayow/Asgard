@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <hr />
-    <span :key="word" v-for="word in computedtextContent">
-      {{ word }}<br />
-    </span>
-  </div>
+  <hr class="above" />
+  <span :key="word" v-for="word in computedtextContent">
+    {{ word }}<br />
+  </span>
 </template>
 
 <script>
 export default {
   name: "DrinkDescriptionBig",
-  props: ["textContent"],
+  props: ["textContent", "device"],
   computed: {
     computedtextContent() {
       return this.$props.textContent.split(" ");
@@ -38,10 +36,16 @@ div {
 span {
   letter-spacing: unset;
 }
-hr {
+hr.above {
   border: 2px solid whitesmoke;
   opacity: 1;
   margin-top: 0;
   margin-bottom: 1rem;
+}
+hr.below {
+  border: 2px solid whitesmoke;
+  opacity: 1;
+  margin-top: 1rem;
+  margin-bottom: 0;
 }
 </style>

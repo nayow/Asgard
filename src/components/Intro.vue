@@ -1,5 +1,5 @@
 <template>
-  <div class="asgard-container">
+  <div ref="asgard-container" class="asgard-container">
     <div class="asgard asgard-left">
       ASGARD
     </div>
@@ -77,7 +77,8 @@ export default {
     return {
       gsapAnims: [],
       elementWidth: 0,
-      currentViewportHeight: 0
+      currentViewportHeight: 0,
+      isDragging: false
     };
   },
   methods: {
@@ -110,12 +111,17 @@ export default {
     },
     initMask() {
       Draggable.create("#circle-shadow", {
+        onMove: function(e) {
+          e.stopImmediatePropagation();
+        },
         onDrag: function() {
           gsap.set("#mask-circle", {
             x: "+=" + this.deltaX,
             y: "+=" + this.deltaY
           });
-        }
+        },
+        onDragStart: () => (this.isDragging = true),
+        onDragEnd: () => (this.isDragging = false)
       });
     },
     scaleEllipse(vh) {
@@ -166,6 +172,12 @@ export default {
   line-height: normal;
   user-select: none; /* prefix */
   z-index: 2;
+}
+/* sm breakpoints */
+@media (max-width: 576px) {
+  .asgard {
+    font-size: 95vh;
+  }
 }
 /* Different line-height for FF */
 @supports (-moz-appearance: none) {

@@ -32,7 +32,6 @@
       </div>
     </div>
   </div>
-  <!-- TODO METTRE DANS LE WRAPPER? -->
   <div class="item bottom-line">
     <div class="d-inline-block">Conditions générales de vente /&nbsp;</div>
     <div class="d-inline-block">Mentions légales /&nbsp;</div>
@@ -137,9 +136,7 @@ export default {
   z-index: 10;
 }
 .wrapper {
-  position: relative;
-  height: calc(100vh - 100px);
-  top: 20px; /** sticking it to the bottom */
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -185,6 +182,9 @@ export default {
   font-size: 0.7em;
 }
 .bottom-line {
+  position: absolute;
+  width: 100%;
+  bottom: 50px;
   font-size: 0.5rem;
   color: #707070;
 }
@@ -211,6 +211,9 @@ a:hover {
   .subtitle {
     font-size: 0.8rem;
     line-height: 1.2;
+  }
+  .sphere {
+    height: 10vh;
   }
 }
 

@@ -3,8 +3,8 @@
   <base-title color="red">LA BOISSON</base-title>
   <img class="bottle" src="@/assets/hildr.png" />
   <div class="flex-container flex-column flex-sm-row">
-    <div class="box-left d-none d-sm-block col-9">
-      <span>HILDR</span>
+    <div class="box-left col-10">
+      <span class="d-none d-sm-inline">HILDR</span>
       <drink-description-big
         text-content="COCKTAIL ENERGISANT"
       ></drink-description-big>
@@ -15,7 +15,7 @@
     <div class="box-center">
       <span class="title">HILDR</span>
     </div>
-    <div class="box-right col-9">
+    <div class="box-right col-10">
       <drink-description-small
         title="Descriptif"
         description="Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans ce lieu, des clans se sont formés autour de chacunes des déesses. Mais alors que ces clans se donnaient à une guerre éternelle, un portail s’est ouvert vers notre monde."
@@ -49,7 +49,8 @@ export default {
       scrollComplete: false,
       gsapAnims: [],
       onScrollAnims: "",
-      initialAngle: "60"
+      initialAngle: "60",
+      isMobile: false
     };
   },
   methods: {
@@ -162,7 +163,6 @@ export default {
 }
 .title {
   font-size: 50vh;
-  /* bottom: 6vh; 12% of font-size is the extra space to add at the bottom to have the text vertically centered in the parent (for this font only) */
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   line-height: normal;
@@ -197,14 +197,15 @@ export default {
     height: 60vw;
   }
 }
-
-.box-left,
-.box-right {
-  flex-basis: 16%;
-  visibility: hidden;
-}
-
-.box-center {
-  flex-basis: 30%;
+/* only when flex-direction becomes row */
+@media (min-width: 576px) {
+  .box-left,
+  .box-right {
+    flex-basis: 16%;
+    visibility: hidden;
+  }
+  .box-center {
+    flex-basis: 30%;
+  }
 }
 </style>

@@ -23,4 +23,10 @@ export default {
   position: absolute;
   padding-top: 2em;
 }
+/* md breakpoint */
+@media (max-width: 768px) {
+  .base-title__content {
+    padding-top: 1em;
+  }
+}
 </style>

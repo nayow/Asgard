@@ -64,6 +64,13 @@ export default {
   font-size: 1.4rem;
 }
 
+/* xs breakpoint (small screens such as iphone 5/5S/5C/SE) */
+@media (max-width: 320px) {
+  #footer {
+    display: none;
+  }
+}
+
 .flex-container {
   height: 100%;
   width: 100vw;

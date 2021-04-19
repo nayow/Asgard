@@ -2,12 +2,12 @@
   <base-title color="blue">L'HISTOIRE</base-title>
   <div class="flex-container">
     <history-background ref="historyBackground"></history-background>
-    <div class="item text col-12 col-sm-10 col-md-8 col-lg-6">
+    <div class="item text col-10 col-md-8 col-lg-6">
       <span>Il existe un royaume,</span>
       <br />
       <span>bien au dessus du nôtre, nommé Asgard.</span>
     </div>
-    <div class="item subtext col-12 col-sm-10 col-md-8 col-lg-6">
+    <div class="item subtext col-10 col-md-8 col-lg-6">
       Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans
       ce lieu, des clans se sont formés autour de chacunes des déesses. Mais
       alors que ces clans se donnaient à une guerre éternelle, un portail s’est

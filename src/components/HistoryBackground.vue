@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       gsapAnims: [[], [], []],
-      initialAngles: ["120", "70", "240"]
+      initialAngles: ["120", "75", "240"]
     };
   },
   methods: {
@@ -93,6 +93,11 @@ export default {
   top: 10vh;
   margin: auto; /* as a flex child, to make it center in the available space */
 }
+@media (max-width: 576px) {
+  .statue-container {
+    top: unset;
+  }
+}
 .statue {
   height: 35vw;
   z-index: 6;
@@ -107,6 +112,12 @@ export default {
 @media (max-width: 576px) {
   .statue {
     height: 75vw;
+  }
+}
+/* sm breakpoint : 0 statue */
+@media (max-width: 320px) {
+  .statue {
+    display: none;
   }
 }
 </style>
