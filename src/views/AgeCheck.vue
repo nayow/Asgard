@@ -6,15 +6,15 @@
       <span>AUX PERSONNES MAJEURES.</span>
     </div>
     <div class="item subtitle">POURQUOI ?</div>
-    <div class="item text col-8 col-lg-6">
+    <div class="item item-hide text col-11 col-md-8 col-lg-6">
       <!-- eslint-disable-next-line prettier/prettier -->
       La loi entend protéger les mineurs de l’incitation à la consommation d’alcool. Outre les mesures de restrictions de la publicité destinées à les protéger, la loi prévoit plusieurs mesures destinées à limiter la possibilité pour les mineurs d‘accéder à l’alcool. Il est interdit de vendre ou d’offrir à titre gratuit dans les lieux publics de l’alcool à des mineurs de moins de 18 ans. Il est également interdit de recevoir dans les débits de boissons alcooliques des mineurs de moins de seize ans qui ne sont pas accompagnés de l’un de leurs parents ou d’un majeur responsable. Le non-respect de ces interdictions est pénalement sanctionné.
     </div>
-    <div class="item subtext">
+    <div class="item item-hide subtext">
       (article L3353-4 du code de la santé publique)
     </div>
-    <div class="item buttons col-8 col-lg-6">
-      <button class="button button1" @click="closeWindow">
+    <div class="item item-hide buttons col-11 col-md-8 col-lg-6">
+      <button class="button button1" @click="denyAccess">
         J'AI — DE 18 ANS
       </button>
       <button class="button button2" @click="allowAccess">
@@ -26,6 +26,7 @@
 
 <script>
 import VueCookies from "vue-cookies";
+import gsap from "gsap";
 export default {
   name: "AgeCheck",
   methods: {
@@ -33,8 +34,12 @@ export default {
       VueCookies.set("asgard_age_check", "allowed", 0);
       this.$router.push("/");
     },
-    closeWindow() {
-      // this.$closeWindow();
+    denyAccess() {
+      document.querySelector(".subtitle").innerHTML = "DÉSOLÉ !";
+      gsap.to(".item-hide", {
+        autoAlpha: 0,
+        duration: 0.2
+      });
     }
   }
 };
@@ -50,10 +55,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-.item {
   text-align: center;
 }
+
 /* ELEMENTS */
 .title {
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -98,7 +102,7 @@ export default {
   font-size: 1.2rem;
 }
 .text {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 .subtext {
   font-size: 0.5rem;

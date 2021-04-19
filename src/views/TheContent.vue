@@ -37,8 +37,7 @@ export default {
     new fullpage("#fullpage", {
       licenseKey: "abc",
       anchors: ["home", "histoire", "boisson", "contact"],
-      responsiveWidth: 600,
-      scrollingSpeed: 1000,
+      scrollingSpeed: 1200,
       menu: "#nav",
       fixedElements: "#nav, #footer",
       paddingTop: "40px",
