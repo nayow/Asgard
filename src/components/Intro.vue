@@ -10,7 +10,7 @@
       ASGARD
     </div>
   </div>
-  <div class="svg-container container-vh-100">
+  <div class="svg-container">
     <svg>
       <defs>
         <clipPath id="mask">
@@ -206,7 +206,7 @@ export default {
 /* wrap svg in div so it doesn't get repainted everytime */
 .svg-container {
   position: absolute;
-  top: 40px;
+  top: 0;
   left: 0;
   width: 100vw;
   z-index: 4;
