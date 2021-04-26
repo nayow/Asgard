@@ -46,9 +46,9 @@
         </linearGradient>
       </defs>
       <g clip-path="url(#mask)">
-        <rect width="100vw" height="100%" fill="#000" />
+        <rect width="100%" height="100%" fill="#000" />
         <image
-          x="40%"
+          x="10px"
           id="background-statue"
           xlink:href="@/assets/statue.png"
         />
@@ -144,25 +144,25 @@ export default {
     // calculate '100vh' and manually sets height, to avoid bug on ios safari when directly using 100vh css property
     convertHeight(viewportHeight) {
       document.getElementsByClassName("container-vh-100").forEach(el => {
-        el.style.height = `${viewportHeight}px`;
-      });
-    },
-    positionStatue(viewportWidth) {
-      gsap.set("#background-statue", {
-        attr: {
-          x: viewportWidth * 0.3 + "px"
-        }
+        el.style.height = `${viewportHeight - 80}px`;
       });
     }
+    // positionStatue(viewportWidth) {
+    //   gsap.set("#background-statue", {
+    //     attr: {
+    //       x: viewportWidth * 0.3 + "px"
+    //     }
+    //   });
+    // }
   },
   watch: {
     currentViewportHeight: function(newVh) {
       this.scaleEllipse(newVh);
       this.convertHeight(newVh);
-    },
-    currentViewportWidth: function(newVw) {
-      this.positionStatue(newVw);
     }
+    // currentViewportWidth: function(newVw) {
+    //   this.positionStatue(newVw);
+    // }
   },
   mounted() {
     this.currentViewportHeight = window.innerHeight;
@@ -184,7 +184,6 @@ export default {
 <style scoped>
 .asgard-container {
   position: relative;
-  top: -40px; /* make it fullscreen */
 }
 .asgard {
   position: absolute;
@@ -200,14 +199,14 @@ export default {
 /* sm breakpoints */
 @media (max-width: 576px) {
   .asgard {
-    font-size: 95vh;
+    font-size: 85vh;
   }
 }
 
 /* wrap svg in div so it doesn't get repainted everytime */
 .svg-container {
   position: absolute;
-  top: 0;
+  top: 40px;
   left: 0;
   width: 100vw;
   z-index: 4;
