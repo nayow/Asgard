@@ -197,6 +197,13 @@ export default {
     height: 60vw;
   }
 }
+/* when flex-direction is column we fix their height so that "HILDR" stays vertically centered */
+@media (max-width: 576px) {
+  .box-left,
+  .box-right {
+    height: 30%;
+  }
+}
 /* only when flex-direction becomes row */
 @media (min-width: 576px) {
   .box-left,

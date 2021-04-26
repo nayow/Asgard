@@ -1,5 +1,5 @@
 <template>
-  <div ref="asgard-container" class="asgard-container">
+  <div ref="asgard-container" class="asgard-container container-vh-100">
     <div class="asgard asgard-left">
       ASGARD
     </div>
@@ -10,7 +10,7 @@
       ASGARD
     </div>
   </div>
-  <div class="svg-container">
+  <div class="svg-container container-vh-100">
     <svg>
       <defs>
         <clipPath id="mask">
@@ -124,23 +124,32 @@ export default {
         onDragEnd: () => (this.isDragging = false)
       });
     },
-    scaleEllipse(vh) {
+    scaleEllipse(viewportHeight) {
       gsap.set(["#mask-circle", "#circle-shadow"], {
         attr: {
-          ry: vh / 3,
-          rx: vh / 5
+          ry: viewportHeight / 3,
+          rx: viewportHeight / 5
         }
       });
     },
     onResize() {
       window.addEventListener("resize", () => {
-        this.$nextTick(() => (this.currentViewportHeight = window.innerHeight));
+        this.$nextTick(() => {
+          this.currentViewportHeight = window.innerHeight;
+        });
+      });
+    },
+    // calculate '100vh' and manually sets height, to avoid bug on ios safari when directly using 100vh css property
+    convertHeight(viewportHeight) {
+      document.getElementsByClassName("container-vh-100").forEach(el => {
+        el.style.height = `${viewportHeight}px`;
       });
     }
   },
   watch: {
     currentViewportHeight: function(newVh) {
       this.scaleEllipse(newVh);
+      this.convertHeight(newVh);
     }
   },
   mounted() {
@@ -149,6 +158,7 @@ export default {
     // because box width is set to 200vh + 40vh padding
     this.elementWidth = this.currentViewportHeight * 2.4;
 
+    this.convertHeight(this.currentViewportHeight);
     this.triggerSlide();
     this.initMask();
     this.scaleEllipse(this.currentViewportHeight);
@@ -159,7 +169,6 @@ export default {
 
 <style scoped>
 .asgard-container {
-  height: 100vh;
   position: relative;
   top: -40px; /* make it fullscreen */
 }
@@ -187,7 +196,6 @@ export default {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
   z-index: 4;
 }
 

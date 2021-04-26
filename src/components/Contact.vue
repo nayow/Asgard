@@ -106,8 +106,8 @@ export default {
 
       // init
       gsap.set(".sphere", {
-        x: 500,
-        y: 500
+        x: 100,
+        y: 100
       });
 
       // save gsap anims for this component

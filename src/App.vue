@@ -20,15 +20,15 @@ export default {
 <style>
 html {
   font-size: 18px; /* new default rem */
-  height: -webkit-fill-available;
+  /* height: -webkit-fill-available; */
 }
 
 body {
   margin: 0px;
   background-color: black;
-  min-height: 100vh;
-  /* mobile viewport bug fix */
-  min-height: -webkit-fill-available;
+  /* min-height: 100vh;
+  mobile viewport bug fix
+  min-height: -webkit-fill-available; */
 }
 
 #app {

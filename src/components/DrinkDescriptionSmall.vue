@@ -2,8 +2,8 @@
   <div v-if="Array.isArray(description)">
     <span>{{ title.toUpperCase() }}</span>
     <hr />
-    <span v-for="item in description" :key="item" class="description">
-      {{ item }} <br />
+    <span v-for="(item, index) in description" :key="item" class="description">
+      {{ item }} <span v-show="index !== description.length - 1">—&nbsp;</span>
     </span>
   </div>
   <div v-else>
