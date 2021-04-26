@@ -165,11 +165,12 @@ export default {
 }
 .asgard {
   position: absolute;
+  height: inherit;
   font-size: 100vh;
   padding: 0 20vh;
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  line-height: normal;
+  line-height: 1;
   user-select: none; /* prefix */
   z-index: 2;
 }
@@ -179,24 +180,13 @@ export default {
     font-size: 95vh;
   }
 }
-/* Different line-height for FF */
-@supports (-moz-appearance: none) {
-  .asgard {
-    line-height: 1;
-  }
-}
-@-moz-document url-prefix() {
-  .asgard {
-    line-height: 1;
-  }
-}
 
 /* wrap svg in div so it doesn't get repainted everytime */
 .svg-container {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   z-index: 4;
 }
