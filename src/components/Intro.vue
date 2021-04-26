@@ -46,8 +46,12 @@
         </linearGradient>
       </defs>
       <g clip-path="url(#mask)">
-        <rect width="100%" height="100%" fill="#000" />
-        <image id="background-statue" xlink:href="@/assets/statue.png" />
+        <rect width="100vw" height="100%" fill="#000" />
+        <image
+          x="40%"
+          id="background-statue"
+          xlink:href="@/assets/statue.png"
+        />
       </g>
       <ellipse
         id="circle-shadow"
@@ -140,7 +144,7 @@ export default {
     // calculate '100vh' and manually sets height, to avoid bug on ios safari when directly using 100vh css property
     convertHeight(viewportHeight) {
       document.getElementsByClassName("container-vh-100").forEach(el => {
-        el.style.height = `${viewportHeight - 80}px`;
+        el.style.height = `${viewportHeight}px`;
       });
     },
     positionStatue(viewportWidth) {
@@ -167,7 +171,7 @@ export default {
     // because box width is set to 200vh + 40vh padding
     this.elementWidth = this.currentViewportHeight * 2.4;
 
-    this.positionStatue(this.currentViewportWidth);
+    // this.positionStatue(this.currentViewportWidth);
     this.convertHeight(this.currentViewportHeight);
     this.triggerSlide();
     this.initMask();
