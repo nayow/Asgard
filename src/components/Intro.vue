@@ -47,11 +47,7 @@
       </defs>
       <g clip-path="url(#mask)">
         <rect width="100%" height="100%" fill="#000" />
-        <image
-          x="25%"
-          id="background-statue"
-          xlink:href="@/assets/statue.png"
-        />
+        <image id="background-statue" xlink:href="@/assets/statue.png" />
       </g>
       <ellipse
         id="circle-shadow"
@@ -78,6 +74,7 @@ export default {
       gsapAnims: [],
       elementWidth: 0,
       currentViewportHeight: 0,
+      currentViewportWidth: 0,
       isDragging: false
     };
   },
@@ -136,13 +133,21 @@ export default {
       window.addEventListener("resize", () => {
         this.$nextTick(() => {
           this.currentViewportHeight = window.innerHeight;
+          this.currentViewportWidth = window.innerWidth;
         });
       });
     },
     // calculate '100vh' and manually sets height, to avoid bug on ios safari when directly using 100vh css property
     convertHeight(viewportHeight) {
       document.getElementsByClassName("container-vh-100").forEach(el => {
-        el.style.height = `${viewportHeight}px`;
+        el.style.height = `${viewportHeight - 80}px`;
+      });
+    },
+    positionStatue(viewportWidth) {
+      gsap.set("#background-statue", {
+        attr: {
+          x: viewportWidth * 0.3 + "px"
+        }
       });
     }
   },
@@ -150,14 +155,19 @@ export default {
     currentViewportHeight: function(newVh) {
       this.scaleEllipse(newVh);
       this.convertHeight(newVh);
+    },
+    currentViewportWidth: function(newVw) {
+      this.positionStatue(newVw);
     }
   },
   mounted() {
     this.currentViewportHeight = window.innerHeight;
+    this.currentViewportWidth = window.innerWidth;
 
     // because box width is set to 200vh + 40vh padding
     this.elementWidth = this.currentViewportHeight * 2.4;
 
+    this.positionStatue(this.currentViewportWidth);
     this.convertHeight(this.currentViewportHeight);
     this.triggerSlide();
     this.initMask();
@@ -200,7 +210,7 @@ export default {
 }
 
 svg {
-  width: 100%;
+  width: 100vw;
   height: 100%;
 }
 
