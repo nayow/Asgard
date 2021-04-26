@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="svg-container">
-    <svg>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
         <clipPath id="mask">
           <ellipse
@@ -48,9 +48,9 @@
       <g clip-path="url(#mask)">
         <rect width="100%" height="100%" fill="#000" />
         <image
-          x="10px"
+          x="25%"
           id="background-statue"
-          xlink:href="@/assets/statue.png"
+          xlink:href="../assets/statue.png"
         />
       </g>
       <ellipse
@@ -137,7 +137,6 @@ export default {
       window.addEventListener("resize", () => {
         this.$nextTick(() => {
           this.currentViewportHeight = window.innerHeight;
-          this.currentViewportWidth = window.innerWidth;
         });
       });
     },
@@ -147,31 +146,19 @@ export default {
         el.style.height = `${viewportHeight - 80}px`;
       });
     }
-    // positionStatue(viewportWidth) {
-    //   gsap.set("#background-statue", {
-    //     attr: {
-    //       x: viewportWidth * 0.3 + "px"
-    //     }
-    //   });
-    // }
   },
   watch: {
     currentViewportHeight: function(newVh) {
       this.scaleEllipse(newVh);
       this.convertHeight(newVh);
     }
-    // currentViewportWidth: function(newVw) {
-    //   this.positionStatue(newVw);
-    // }
   },
   mounted() {
     this.currentViewportHeight = window.innerHeight;
-    this.currentViewportWidth = window.innerWidth;
 
     // because box width is set to 200vh + 40vh padding
     this.elementWidth = this.currentViewportHeight * 2.4;
 
-    // this.positionStatue(this.currentViewportWidth);
     this.convertHeight(this.currentViewportHeight);
     this.triggerSlide();
     this.initMask();
@@ -188,7 +175,7 @@ export default {
 .asgard {
   position: absolute;
   height: inherit;
-  font-size: 100vh;
+  font-size: 90vh;
   padding: 0 20vh;
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
