@@ -175,7 +175,8 @@ export default {
 }
 .asgard {
   position: absolute;
-  height: inherit;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 90vh;
   padding: 0 20vh;
   font-family: "Futhark", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
