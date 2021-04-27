@@ -47,7 +47,12 @@
       </defs>
       <g clip-path="url(#mask)">
         <rect width="100%" height="100%" fill="#000" />
-        <image x="25%" id="background-statue" href="../assets/statue.png" />
+        <image
+          xlink:href="../assets/statue.png"
+          id="background-statue"
+          width="100%"
+          height="100%"
+        />
       </g>
       <ellipse
         id="circle-shadow"
@@ -201,9 +206,9 @@ svg {
   height: 100%;
 }
 
-#background-statue {
+/* #background-statue {
   height: 100vh;
-}
+} */
 
 #circle-shadow {
   cursor: url(../assets/picto.png) 16 16, move !important;
