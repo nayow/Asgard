@@ -47,11 +47,7 @@
       </defs>
       <g clip-path="url(#mask)">
         <rect width="100%" height="100%" fill="#000" />
-        <image
-          x="25%"
-          id="background-statue"
-          xlink:href="../assets/statue.png"
-        />
+        <image x="25%" id="background-statue" href="../assets/statue.png" />
       </g>
       <ellipse
         id="circle-shadow"
