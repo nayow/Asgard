@@ -43,7 +43,7 @@ export default {
   align-items: center;
   justify-content: flex-end;
   height: 100%;
-  padding-bottom: 4vh; /* keep some space below */
+  padding-bottom: 3vh; /* keep some space below */
 }
 
 .item {

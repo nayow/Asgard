@@ -91,12 +91,7 @@ export default {
   align-items: center;
   position: relative;
   top: 10vh;
-  margin-top: auto; /* as a flex child, to make it center in the available space */
-}
-@media (max-width: 576px) {
-  .statue-container {
-    top: unset;
-  }
+  margin: auto; /* as a flex child, to make it center in the available space */
 }
 .statue {
   height: 35vw;
@@ -110,6 +105,10 @@ export default {
 }
 /* sm breakpoint : 1 statue */
 @media (max-width: 576px) {
+  .statue-container {
+    top: 3vh; /* as container */
+    margin-top: auto; /* as flex child */
+  }
   .statue {
     height: 65vw;
   }
