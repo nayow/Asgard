@@ -93,6 +93,11 @@ export default {
   top: 10vh;
   margin: auto; /* as a flex child, to make it center in the available space */
 }
+@media (max-width: 576px) {
+  .statue-container {
+    top: 5vh;
+  }
+}
 .statue {
   height: 35vw;
   z-index: 6;
@@ -105,10 +110,6 @@ export default {
 }
 /* sm breakpoint : 1 statue */
 @media (max-width: 576px) {
-  .statue-container {
-    top: 3vh; /* as container */
-    margin-top: auto; /* as flex child */
-  }
   .statue {
     height: 65vw;
   }
