@@ -9,9 +9,9 @@
     <div
       class="item item-menu d-inline-flex justify-content-evenly d-sm-inline"
     >
-      <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
+      <!-- <a href="#histoire" data-menuanchor="histoire">HISTOIRE</a> —
       <a href="#boisson" data-menuanchor="boisson">BOISSON</a> —
-      <a href="#contact" data-menuanchor="contact">CONTACT</a>
+      <a href="#contact" data-menuanchor="contact">CONTACT</a> -->
     </div>
   </div>
 </template>
@@ -57,9 +57,9 @@ export default {
   color: inherit;
 }
 
-/* dynamically added by fullpage.js */
 #nav a.active {
-  font-weight: 900;
+  font-weight: bold;
+  font-family: "Univers LT Std Bold";
 }
 
 #nav a.div-exact-active {

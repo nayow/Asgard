@@ -1,7 +1,8 @@
 <template>
   <hr class="d-none d-sm-block above" />
-  <span :key="word" v-for="word in computedtextContent">
-    {{ word }}<br />
+  <span v-if="viewportWidth <= 576">{{ computedtextContent }}</span>
+  <span v-else :key="word" v-for="word in computedtextContent.split(' ')">
+    {{ word }}
   </span>
   <hr class="d-sm-none below" />
 </template>
@@ -10,10 +11,28 @@
 export default {
   name: "DrinkDescriptionBig",
   props: ["textContent", "device"],
+  data() {
+    return {
+      viewportWidth: 0
+    };
+  },
   computed: {
     computedtextContent() {
-      return this.$props.textContent.split(" ");
+      return this.$props.textContent;
     }
+  },
+  methods: {
+    onResize() {
+      window.addEventListener("resize", () => {
+        this.$nextTick(() => {
+          this.viewportWith = window.innerWidth;
+        });
+      });
+    }
+  },
+  mounted() {
+    this.viewportWith = window.innerWidth;
+    this.onResize();
   }
 };
 </script>

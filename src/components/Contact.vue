@@ -33,9 +33,13 @@
     </div>
   </div>
   <div class="item bottom-line">
-    <div class="d-inline-block">Conditions générales de vente /&nbsp;</div>
-    <div class="d-inline-block">Mentions légales /&nbsp;</div>
-    <div class="d-inline-block">Utilisation des cookies</div>
+    <a href="#" @click="routeTo('/conditions-generales')" class="d-inline-block"
+      >Conditions générales de vente /&nbsp;</a
+    >
+    <a href="#" @click="routeTo('/mentions-legales')" class="d-inline-block"
+      >Mentions légales</a
+    >
+    <!-- <div class="d-inline-block">Utilisation des cookies</div> -->
   </div>
 </template>
 
@@ -55,6 +59,9 @@ export default {
     };
   },
   methods: {
+    routeTo(path) {
+      this.$router.replace(path);
+    },
     animateSphere() {
       // vars
 
@@ -111,12 +118,9 @@ export default {
       });
 
       // save gsap anims for this component
-      // this.gsapAnims[0] = moveX(".sphere");
-      // this.gsapAnims[1] = moveY(".sphere");
-      // this.gsapAnims[2] = rotate(".sphere");
-      moveX(".sphere");
-      moveY(".sphere");
-      rotate(".sphere");
+      this.gsapAnims[0] = moveX(".sphere");
+      this.gsapAnims[1] = moveY(".sphere");
+      this.gsapAnims[2] = rotate(".sphere");
     }
   },
   mounted() {

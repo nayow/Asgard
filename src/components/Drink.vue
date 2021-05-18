@@ -13,12 +13,12 @@
       ></drink-description-big>
     </div>
     <div class="box-center">
-      <span class="title">HILDR</span>
+      <span class="title">{{ drinkName }}</span>
     </div>
     <div class="box-right col-10">
       <drink-description-small
         title="Descriptif"
-        description="Royaume où règnent des déesses nordiques aux pouvoirs innombrables. Dans ce lieu, des clans se sont formés autour de chacunes des déesses. Mais alors que ces clans se donnaient à une guerre éternelle, un portail s’est ouvert vers notre monde."
+        description="Hildr, première boisson du royaume d'Asgard saura vous séduire par ses arômes de citron, gingembre et maté, par sa légèreté et son caractère, à l'image du personnage qu'elle représente : une guerrière aux pouvoirs exceptionnels."
       ></drink-description-small>
       <drink-description-small
         title="Descriptif technique"
@@ -32,6 +32,7 @@
 // eslint-disable-next-line prettier/prettier
 import BaseTitle from "./BaseTitle.vue";
 import { gsap } from "gsap";
+import axios from "axios";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import DrinkDescriptionBig from "./DrinkDescriptionBig.vue";
 import DrinkDescriptionSmall from "./DrinkDescriptionSmall.vue";
@@ -46,6 +47,7 @@ export default {
   },
   data() {
     return {
+      drinkName: "",
       scrollComplete: false,
       gsapAnims: [],
       onScrollAnims: "",
@@ -90,7 +92,7 @@ export default {
             that.allowScrollDown();
           }
         },
-        2
+        1
       );
       return tl;
     },
@@ -145,10 +147,19 @@ export default {
     startAnimations() {
       this.onScrollAnims.play();
       this.allowScrollDown();
+    },
+    fetchResource(path, attribute) {
+      let apiUrl = "http://asgard.cool/wp-json/wp/v2";
+      return new Promise(function(resolve, reject) {
+        axios(apiUrl + path).then(res => resolve(res.data[attribute].rendered));
+      });
     }
   },
   mounted() {
     this.onScrollAnims = this.initAnimsTimeline();
+    this.fetchResource("/posts/67", "title").then(
+      res => (this.drinkName = res)
+    );
   }
 };
 </script>

@@ -1,6 +1,10 @@
 <template>
   <TheHeader v-show="$route.name !== 'AgeCheck'" />
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
   <TheFooter />
 </template>
 
